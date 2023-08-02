@@ -1,0 +1,64 @@
+.signInPage, .signUpPage {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 1) 100%),
+        url('https://mebincdn.themebin.com/1664271579476.jpg');
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signInPage {
+    .signInLogo {
+        top: 0;
+        left: 0;
+        
+    }
+}
+
+.form {
+    width: 300px;
+    height: 300px;
+    padding: 35px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #101010;
+
+    .signIn {
+        background-color: red;
+        width: 100%;
+    }
+
+    .signInInput {
+        
+        
+    }
+}
+
+.signUpForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .signUpBtn {
+        background-color: red;
+        border-radius: 0;
+        height: 47px;
+    }
+
+    .signUpInput  {
+        background-color: #ffffff;
+        width: 80%;
+        height: 41px;
+        border-radius: 0;
+        &::placeholder {
+            color: #000000;
+        }
+    }
+}

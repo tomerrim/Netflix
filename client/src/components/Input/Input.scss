@@ -1,0 +1,11 @@
+.input {
+    width: 97%;
+    background-color: gray;
+    border-radius: 5px;
+    height: 30px;
+    margin-bottom: 5px;
+
+    &::placeholder {
+        color: lightgray;
+    }
+}

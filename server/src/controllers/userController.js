@@ -27,7 +27,7 @@ export const signUp = async (req, res) => {
 
 export const signIn = async (req, res) => {
     const { username, email, password } = req.body;
-    const user =  await getUserByEmail(email);
+    const user = await getUserByEmail(email);
     if(user) {
         if (bcrypt.compareSync(password, user.password)) {
             res.send({
