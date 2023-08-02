@@ -5,7 +5,8 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   profilePicture: { type: String, required: true },
-  //   favorites: {type: [Content]}
+  favoritesList: [{ type: Schema.Types.ObjectId, ref: "Content" }],
+  watchList: [{ type: Schema.Types.ObjectId, ref: "Content" }],
 });
 
 const User = mongoose.model('User', userSchema);

@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import seedRouter from "../src/routes/seedRoute.js";
+import userRouter from "./routes/userRoute.js";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/users", userRouter);
 app.use("/api/seedData", seedRouter);
 
 mongoose.connect(MONGODB_URL).then(() => {
