@@ -26,10 +26,10 @@ export const SignIn = () => {
         <div className="signInPage">
             <Title title={"Sign In"} />
             <div className="signInLogo">
-            <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
-                alt="Netflix Logo" width={200} height={60}
-            />
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
+                    alt="Netflix Logo" width={200} height={60}
+                />
             </div>
             <div className="form">
                 <h1>Sign In</h1>

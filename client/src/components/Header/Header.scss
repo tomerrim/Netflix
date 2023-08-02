@@ -1,0 +1,22 @@
+.nav {
+    background-color: transparent;
+    padding: 10px;
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+
+        .itemslist {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+
+            .item {
+                color: #ffffff;
+                font-weight: 400;
+                padding: 6px 4px;
+            }
+        }
+    }
+}

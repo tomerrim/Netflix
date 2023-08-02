@@ -1,0 +1,21 @@
+.content {
+    p {
+        max-width: 30%;
+        word-wrap: normal;
+    }
+
+    .line {
+        display: flex;
+
+        .play {
+            background-color: #ffffff;
+            color: #000000;
+            margin-right: 15px;
+        }
+
+        .info {
+            background-color: gray;
+            color: #ffffff;
+        }
+    }
+}
