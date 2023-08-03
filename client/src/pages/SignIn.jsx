@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import Title from "../components/Title";
 import { Input } from "../components/Input";
 import { Btn } from "../components/Btn";
 import "./styles.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchuser } from "../store/userSlice";
 
 export const SignIn = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const user = useSelector(state => state.userSlice.user);
+    const error = useSelector(state => state.userSlice.error);
+    // const loading = useSelector(state => state.userSlice.loading);
+
+    useEffect(() => {
+        if(user) {
+            navigate("/")
+        } else if (error) {
+            console.log("Error")
+        }
+    },[navigate, user, error])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post("/users/signin", {email, password});
-            console.log("data: ", data);
+            dispatch(fetchuser({email, password}))
             navigate("/");
         } catch (error) {
             console.log("error: ", error);

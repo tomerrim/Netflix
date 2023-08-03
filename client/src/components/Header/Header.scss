@@ -18,5 +18,16 @@
                 padding: 6px 4px;
             }
         }
+
+        .user {
+            margin-left: auto;
+            display: flex;
+            gap: 8px;
+
+            .signOut {
+                background-color: red;
+                color: #ffffff;
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./RandomContent.scss";
-import { Btn } from "./Btn";
+import { Btn } from "../Btn";
 
 export const RandomContent = ({content}) => {
 
