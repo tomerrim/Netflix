@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import "./Header.scss";
 import { NetflixLogo } from "../NetflixLogo";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Btn } from "../Btn";
+import { useEffect, useState } from "react";
 
 const HEADER_ITEMS = [
     { title: "Movies", path: "/movies" },
@@ -11,10 +12,28 @@ const HEADER_ITEMS = [
 
 export const Header = () => {
 
-    const user = useSelector(state => state.userSlice.user);
-    console.log(user)
+    const [scrolled, setScrolled] = useState(false);
+    // const user = useSelector(state => state.userSlice.user);
+    // console.log(user)
+
+    useEffect(()=>{
+      const handleScroll = () => {
+        if(window.scrollY > 0) {
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
+      }
+      window.addEventListener("scroll",handleScroll)
+
+      return () => {
+        // cleanup function
+        window.removeEventListener('scroll', handleScroll)
+      }
+    },[])
+
     return (
-      <header>
+      <header className={scrolled ? "scrolled" : ""}>
         <nav className="nav">
           <div className="wrapper">
             <div className="itemslist">

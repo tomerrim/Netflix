@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
-import { Header } from './components/Header';
+// import { Header } from './components/Header';
 import { SignUp } from './pages/SignUp';
 import { SignIn } from './pages/SignIn';
 import { Provider } from 'react-redux';
@@ -13,12 +13,14 @@ function App() {
     <div className='App'>
       <Provider store={store}>
         <BrowserRouter>
-          <Header/>
+          {/* <Header/> */}
           <main>
             <Routes>
-              <Route path='/' element={<HomePage/>}/>
               <Route path='/signup' element={<SignUp/>}/>
               <Route path='/signin' element={<SignIn/>}/>
+              <Route path='/' element={<HomePage/>}>
+
+              </Route>
             </Routes>
           </main>
         </BrowserRouter>

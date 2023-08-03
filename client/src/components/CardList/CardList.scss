@@ -1,0 +1,17 @@
+.cardList {
+    display: flex;
+    flex-direction: column;
+    
+    // margin: 0 auto;
+    .title {
+        font-size: 30px ;
+        text-align: start;
+        padding: 30px 0 15px 30px;
+
+    }
+
+    .carousel-item-padding-40-px {
+        padding: 0 5px !important;
+        /* Adjust this value according to your needs */
+    }
+}

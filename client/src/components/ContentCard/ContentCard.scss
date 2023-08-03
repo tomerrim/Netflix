@@ -1,4 +1,76 @@
-.card {
-    width: 200px;
-    height: auto;
+// .contentCard {
+    
+//     img {
+//         width: 100%;
+//         height: 100px;
+//         object-fit: cover;
+//         max-width: 100%;
+//         display: block;
+//     }
+// }
+
+// @media (min-width: 768px) {
+//     .contentCard img {
+//         width: 80%;
+//         height: 100px;
+//     }
+// }
+
+.contentCard {
+    // Basic styling for the card container
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    border-radius: 10px;
+    
+    // Add a hover effect for desktop
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    // Styling for the card title
+    h1 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    // Styling for the images
+    img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+    }
+
+    // Mobile-specific styling
+    &.mobile {
+        padding: 10px;
+
+        h1 {
+            font-size: 16px;
+        }
+
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            max-width: 100%;
+            display: block;
+        }
+    }
+
+    // Desktop-specific styling
+    &.desktop {
+
+        img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            max-width: 100%;
+            display: block;
+        }
+    }
 }

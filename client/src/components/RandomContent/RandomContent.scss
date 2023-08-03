@@ -1,7 +1,16 @@
 .content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    
     p {
         max-width: 30%;
         word-wrap: normal;
+        text-align: start;
+    }
+
+    .imgTitle {
+        width: 30%;
     }
 
     .line {

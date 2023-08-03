@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const contentSlice = createSlice({
     name: "contentSlice",
     initialState: {
-        content: null,
+        content: [],
     },
     reducers: {
         setContent(state, action) {
