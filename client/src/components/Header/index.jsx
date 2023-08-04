@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import "./Header.scss";
 import { NetflixLogo } from "../NetflixLogo";
 // import { useSelector } from "react-redux";
 import { Btn } from "../Btn";
 import { useEffect, useState } from "react";
+import "./Header.scss";
 
 const HEADER_ITEMS = [
     { title: "Movies", path: "/movies" },
@@ -33,7 +33,7 @@ export const Header = () => {
     },[])
 
     return (
-      <header className={scrolled ? "scrolled" : ""}>
+      <header className={scrolled ? "scrolled" : "top"}>
         <nav className="nav">
           <div className="wrapper">
             <div className="itemslist">

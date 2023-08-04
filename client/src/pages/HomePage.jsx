@@ -1,31 +1,46 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { CardList } from "../components/CardList";
-import { Header } from "../components/Header";
 import { setContent } from "../store/contentSlice";
 import { customFetch } from "../utils/customFetch";
 import { RandomContent } from "../components/RandomContent";
 
 export const HomePage = () => {
   const dispatch= useDispatch();
+  const [randomIndex, setRandomIndex] = useState(null);
+  const { content } = useSelector(state => state.contentSlice);
 
   const fetchAllContent = async () => {
     try {
       const allContent = await customFetch("content", "GET");
-      console.log("all content:", allContent)
+      //console.log("all content:", allContent)
       dispatch(setContent(allContent));
+      updateRandomIndex(allContent.length);
     } catch (error) {
       console.log("Failed to fetch content");
     }
   }
 
+  const updateRandomIndex = (length) => {
+    const randIndex = Math.floor(Math.random() * length);
+    setRandomIndex(randIndex);
+  }
+
   useEffect(() => {
+    console.log("fetch data")
     fetchAllContent();
   }, []);
 
-  const content = useSelector(state => state.contentSlice.content);
-  console.log("content: ",content);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateRandomIndex(content.length);
+    }, 20000);
+
+    return () => clearInterval(interval);
+  },[content]);
+
+  // console.log("content: ",content);
 
   // const navigate = useNavigate();
   // const user = useSelector(state => state.userSlice.user);
@@ -37,10 +52,9 @@ export const HomePage = () => {
 
   return (
     <>
-    <Header/>
     <div className="homePage">
-      {/* <h1>Welcome to my website!</h1> */}
-      {content && <RandomContent content={content[0]}/>}
+      { content[randomIndex] && <RandomContent content={content[randomIndex]}/>}
+      <CardList cards={content} title={"All Content"}/>
       <CardList cards={content} title={"All Content"}/>
     </div>
     </>
