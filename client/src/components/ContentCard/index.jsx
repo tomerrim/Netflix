@@ -2,11 +2,14 @@
 import { useEffect, useState } from "react";
 import "./ContentCard.scss";
 import { TrailerCard } from "../TrailerCard";
+import { useNavigate } from "react-router-dom";
 
 export const ContentCard = ({ content }) => {
-    
+    const navigate = useNavigate();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [isHovered, setIsHovered] = useState(false);
+
+    const navToInfo = () => navigate(`/content/${content._id}`);
 
     useEffect(() => {
       const handleResize = () => {
@@ -27,7 +30,8 @@ export const ContentCard = ({ content }) => {
     return (
       <div className={`contentCard ${isMobile ? "mobile" : "desktop"}`}
        onMouseEnter={() => setIsHovered(true)}
-       onMouseLeave={() => setIsHovered(false)}>
+       onMouseLeave={() => setIsHovered(false)}
+       onClick={navToInfo}>
         {isHovered ? (
           <TrailerCard content={content}/>
           ) : (

@@ -25,10 +25,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <Route path="/signup" element={<SignUp />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/" element={<App />}>
-                <Route path='/' element={<HomePage/>}/>
+                <Route path="/" element={<HomePage />} />
                 <Route path="/content/:_id" element={<InfoPage />} />
               </Route>
-              <Route path='/content/:_id/trailer' element={<WatchPage/>}/>
+              <Route path="/content/:_id/trailer" element={<WatchPage />} />
             </Routes>
           </main>
         </BrowserRouter>

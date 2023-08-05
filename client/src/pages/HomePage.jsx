@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { CardList } from "../components/CardList";
 import { setContent,setMovies, setSeries } from "../store/contentSlice";
@@ -10,7 +10,16 @@ import "./styles.scss";
 export const HomePage = () => {
   const dispatch= useDispatch();
   const [randomIndex, setRandomIndex] = useState(null);
-  const { content } = useSelector(state => state.contentSlice);
+  const { content, movies, series } = useSelector(state => state.contentSlice);
+  // let data;
+
+  // if (contentType === "movies") {
+  //   data = movies;
+  // } else if (contentType === "series") {
+  //   data = series;
+  // } else {
+  //   data = content;
+  // }
 
   const fetchAllContent = async () => {
     try {
@@ -33,6 +42,7 @@ export const HomePage = () => {
   useEffect(() => {
     console.log("fetch data")
     fetchAllContent();
+    // updateRandomIndex(data.length);
   }, []);
 
   useEffect(() => {
@@ -58,7 +68,8 @@ export const HomePage = () => {
     <div className="homePage">
       { content[randomIndex] && <RandomContent content={content[randomIndex]}/>}
       <CardList cards={content} title={"All Content"}/>
-      <CardList cards={content} title={"All Content"}/>
+      <CardList cards={movies} title={"All Movies"}/>
+      <CardList cards={series} title={"All Series"}/>
     </div>
     </>
   );
