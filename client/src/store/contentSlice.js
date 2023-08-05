@@ -4,6 +4,8 @@ export const contentSlice = createSlice({
     name: "contentSlice",
     initialState: {
         content: [],
+        movies: [],
+        series: [],
         singleContent: null,
     },
     reducers: {
@@ -12,9 +14,15 @@ export const contentSlice = createSlice({
         },
         setSingleContent(state, action) {
             state.singleContent = action.payload;
+        },
+        setMovies (state, action) {
+            state.movies = action.payload.filter(content => content.isSeries === false);
+        },
+        setSeries(state, action) {
+            state.series = action.payload.filter(content => content.isSeries === true);
         }
     }
 });
 
 export const contentReducer = contentSlice.reducer;
-export const { setContent, setSingleContent } = contentSlice.actions;
+export const { setContent, setSingleContent, setMovies, setSeries } = contentSlice.actions;

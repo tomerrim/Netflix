@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
 import { CardList } from "../components/CardList";
-import { setContent } from "../store/contentSlice";
+import { setContent,setMovies, setSeries } from "../store/contentSlice";
 import { customFetch } from "../utils/customFetch";
 import { RandomContent } from "../components/RandomContent";
+import "./styles.scss";
 
 export const HomePage = () => {
   const dispatch= useDispatch();
@@ -16,6 +17,8 @@ export const HomePage = () => {
       const allContent = await customFetch("content", "GET");
       //console.log("all content:", allContent)
       dispatch(setContent(allContent));
+      dispatch(setMovies(allContent));
+      dispatch(setSeries(allContent))
       updateRandomIndex(allContent.length);
     } catch (error) {
       console.log("Failed to fetch content");

@@ -1,23 +1,26 @@
 /* eslint-disable react/prop-types */
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Btn } from "../components/Btn";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { customFetch } from "../utils/customFetch";
 import { setSingleContent } from "../store/contentSlice";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import "./styles.scss";
 
 export const InfoPage = () => {
   const { singleContent } = useSelector(state => state.contentSlice);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const { _id } = params;
-  console.log("id: ", _id);
+  // console.log("id: ", _id);
   
+  const navToWatch = () => navigate(`/content/${singleContent._id}/trailer`);
   const getSingleContent = async (id) => {
     try {
       const singleContent = await customFetch(`content/${id}`, "GET");
-      console.log("single: ",singleContent)
+      // console.log("single: ",singleContent)
       dispatch(setSingleContent(singleContent));
     } catch (error) {
       console.log(error);
@@ -28,7 +31,7 @@ export const InfoPage = () => {
     getSingleContent(_id);
   },[_id])
 
-  console.log(singleContent);
+  // console.log(singleContent);
 
   return (
     <div className="infoPage">
@@ -44,7 +47,7 @@ export const InfoPage = () => {
               <span>Duration: {singleContent.duration}</span>
               <span>Age restriction: {singleContent.limit}+</span>
               <span>Genre: {singleContent.genre}</span>
-              <Btn className={"play"}> <PlayArrowIcon/>Play</Btn>
+              <Btn className={"play"} onClick={navToWatch}> <PlayArrowIcon/> Play </Btn>
             </div>
           </div>
         </>

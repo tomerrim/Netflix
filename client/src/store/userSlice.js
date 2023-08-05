@@ -23,7 +23,7 @@ export const userSlice = createSlice({
     setUser(state, action) {
       state.user = action.payload;
     },
-    logout(state) {
+    signOut(state) {
         state.user = null;
         state.loading = false;
         state.error = null;
@@ -54,4 +54,4 @@ export const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-export const { setUser } = userSlice.actions;
+export const { setUser, signOut } = userSlice.actions;
