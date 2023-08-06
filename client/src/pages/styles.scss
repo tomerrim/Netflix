@@ -11,13 +11,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
 
-.signInPage {
     .signInLogo {
-        top: 0;
-        left: 0;
-        
+        position: absolute;
+        top: 2%;
+        left: 2%;
     }
 }
 
@@ -32,12 +30,11 @@
     .signIn {
         background-color: red;
         width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
-    .signInInput {
-        
-        
-    }
+    // .signInInput {}
 }
 
 .signUpForm {
@@ -56,6 +53,7 @@
 
     .signUpInput  {
         background-color: #ffffff;
+        color: #000000;
         width: 80%;
         height: 41px;
         border-radius: 0;

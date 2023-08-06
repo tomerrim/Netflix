@@ -6,11 +6,24 @@ import { setContent,setMovies, setSeries } from "../store/contentSlice";
 import { customFetch } from "../utils/customFetch";
 import { RandomContent } from "../components/RandomContent";
 import "./styles.scss";
+import Title from "../components/Title";
 
 export const HomePage = () => {
   const dispatch= useDispatch();
+  // const navigate = useNavigate();
   const [randomIndex, setRandomIndex] = useState(null);
   const { content, movies, series } = useSelector(state => state.contentSlice);
+  const {user, isLoggedIn } = useSelector((state) => state.userSlice);
+  const userFavoritesIds = useSelector(state =>state.userSlice.user && state.userSlice.user.favoritesList); 
+  //fixed by adding state.userSlice.user &&
+
+  let userFavorites = [];
+  if (userFavoritesIds) {
+    userFavorites = userFavoritesIds.map((favId) => {
+      return content.find((c) => c._id === favId);
+    })
+  } 
+  // console.log(user);
   // let data;
 
   // if (contentType === "movies") {
@@ -65,8 +78,11 @@ export const HomePage = () => {
 
   return (
     <>
+    <Title title={"Netflix"}/>
     <div className="homePage">
       { content[randomIndex] && <RandomContent content={content[randomIndex]}/>}
+      { isLoggedIn && userFavorites.length > 0 && <CardList cards={userFavorites} title={"Favorites"}/> }
+      { isLoggedIn && user && <CardList cards={user.watchList} title={"Watch List"}/> }
       <CardList cards={content} title={"All Content"}/>
       <CardList cards={movies} title={"All Movies"}/>
       <CardList cards={series} title={"All Series"}/>

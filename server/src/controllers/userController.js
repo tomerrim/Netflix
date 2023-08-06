@@ -31,9 +31,13 @@ export const signIn = async (req, res) => {
     if(user) {
         if (bcrypt.compareSync(password, user.password)) {
             res.send({
-                _id: user._id,
-                username: user.username,
-                email: user.email,
+                user: {
+                    _id: user._id,
+                    username: user.username,
+                    email: user.email,
+                    favoritesList: [],
+                    watchList: [],
+                },
                 token:generateToken(user),
             })
             return;
@@ -41,5 +45,24 @@ export const signIn = async (req, res) => {
     }
     res.status(401).send({message: "Invalid Credentials"});
 };
+
+export const toggleFavorite = async (req, res) => {
+    const userId = req.user._id;
+    const contentId = req.params.contentId;
+
+    const user = await User.findById(userId);
+    if(!user) return res.status(404).send("User Not Found");
+
+    const index = user.favoritesList.indexOf(contentId);
+    if(index === -1) {
+        user.favoritesList.push(contentId);
+    } else {
+        user.favoritesList.splice(index, 1);
+    }
+
+    await user.save();
+
+    res.json({favoritesList: user.favoritesList});
+}
 
 export const getUserByEmail = (email) => User.findOne({email});

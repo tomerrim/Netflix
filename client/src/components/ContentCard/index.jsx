@@ -31,7 +31,8 @@ export const ContentCard = ({ content }) => {
       <div className={`contentCard ${isMobile ? "mobile" : "desktop"}`}
        onMouseEnter={() => setIsHovered(true)}
        onMouseLeave={() => setIsHovered(false)}
-       onClick={navToInfo}>
+      //  onClick={navToInfo}
+       >
         {isHovered ? (
           <TrailerCard content={content}/>
           ) : (

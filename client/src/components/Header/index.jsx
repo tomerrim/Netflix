@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { NetflixLogo } from "../NetflixLogo";
-// import { useSelector } from "react-redux";
 import { Btn } from "../Btn";
 import { useEffect, useState } from "react";
 import "./Header.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../store/userSlice";
 
 const HEADER_ITEMS = [
@@ -17,8 +16,8 @@ export const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [scrolled, setScrolled] = useState(false);
-    // const user = useSelector(state => state.userSlice.user);
-    // console.log(user)
+    const user = useSelector(state => state.userSlice.user);
+    console.log("user: ",user)
 
     const signOutClick = () => {
       dispatch(signOut());
@@ -54,7 +53,7 @@ export const Header = () => {
               ))}
             </div>
             <div className="user">
-              {/* <h2>{user.email}</h2> */}
+              {user && <h3>{user.username}</h3>}
               <Btn className={"signOut"} onClick={signOutClick}>Sign Out</Btn>
             </div>
           </div>

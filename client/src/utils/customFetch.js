@@ -2,18 +2,14 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:8000/api";
 
-export const customFetch = async (url, method, data) => {
+export const customFetch = async (url, method, data, headers = {}) => {
     try {
         if (method === "GET") {
             const response = await axios.get(`${baseUrl}/${url}`, { params: data });
             return response.data;
         }
         else if (method === "POST") {
-            const response = await axios.post({
-                method,
-                url: `${baseUrl}/${url}`,
-                data
-            });
+            const response = await axios.post(`${baseUrl}/${url}`, data, { headers });
             return response.data;
         }
     } catch (error) {

@@ -1,13 +1,14 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import './App.css'
 import { Layout } from './components/Layout';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 // import { customFetch } from './utils/customFetch';
 // import { useDispatch } from 'react-redux';
 // import { setContent, setMovies, setSeries } from './store/contentSlice';
 // import { useEffect } from 'react';
 
 function App() {
-
   // const dispatch = useDispatch();
   // // const { contentType } = useParams();
   // const fetchAllContent = async () => {
@@ -26,13 +27,21 @@ function App() {
   //   fetchAllContent();
   // }, [])
 
+  const navigate = useNavigate();
+  const user = useSelector(state => state.userSlice.user);
+  useEffect(() => {
+    if (!user) {
+      navigate("/signIn");
+    }
+  }, [user]);
+
   return (
-    <div className='App'>
+    <div className="App">
       <Layout>
-        <Outlet/>
+        <Outlet />
       </Layout>
     </div>
-  )
+  );
 }
 
 export default App
