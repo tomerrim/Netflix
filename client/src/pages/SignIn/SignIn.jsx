@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Title from "../components/Title";
-import { Input } from "../components/Input";
-import { Btn } from "../components/Btn";
-import "./styles.scss";
+import Title from "../../components/Title";
+import { Input } from "../../components/Input";
+import { Btn } from "../../components/Btn";
+import "./SignIn.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchuser } from "../store/userSlice";
-import { NetflixLogo } from "../components/NetflixLogo";
+import { fetchuser } from "../../store/userSlice";
+import { NetflixLogo } from "../../components/NetflixLogo";
 
 export const SignIn = () => {
     const navigate = useNavigate();

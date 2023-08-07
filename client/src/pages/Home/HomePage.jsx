@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import {  useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
-import { CardList } from "../components/CardList";
-import { setContent,setMovies, setSeries } from "../store/contentSlice";
-import { customFetch } from "../utils/customFetch";
-import { RandomContent } from "../components/RandomContent";
-import "./styles.scss";
-import Title from "../components/Title";
+import { CardList } from "../../components/CardList";
+import { setContent,setMovies, setSeries } from "../../store/contentSlice";
+import { customFetch } from "../../utils/customFetch";
+import { RandomContent } from "../../components/RandomContent";
+import "./Home.scss";
+import Title from "../../components/Title";
 
 export const HomePage = () => {
   const dispatch= useDispatch();

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
-import "./styles.scss";
+import "./Search.scss";
 import { useState } from "react";
 
 const FILTERS = [

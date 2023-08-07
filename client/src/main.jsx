@@ -6,13 +6,13 @@ import { HelmetProvider } from 'react-helmet-async'
 import axios from 'axios'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { SignUp } from './pages/SignUp.jsx'
-import { SignIn } from './pages/SignIn.jsx'
-import { HomePage } from "./pages/HomePage.jsx"
-import { InfoPage } from './pages/InfoPage.jsx'
+import { SignUp } from './pages/SignUp/SignUp.jsx'
+import { SignIn } from './pages/SignIn/SignIn.jsx'
+import { HomePage } from "./pages/Home/HomePage.jsx"
+import { InfoPage } from './pages/Info/InfoPage.jsx'
 import { store } from "./store"
-import { WatchPage } from './pages/WatchPage.jsx'
-import { SearchPage } from './pages/SearchPage.jsx'
+import { WatchPage } from './pages/Watch/WatchPage.jsx'
+import { SearchPage } from './pages/Search/SearchPage.jsx'
 
 axios.defaults.baseURL = "http://localhost:8000/api";
 

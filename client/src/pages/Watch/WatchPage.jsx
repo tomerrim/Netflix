@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
 import ReactPlayer from "react-player";
-import "./styles.scss";
+import "./Watch.scss";
 import { useNavigate } from "react-router-dom";
-import { Btn } from "../components/Btn";
+import { Btn } from "../../components/Btn";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 
 export const WatchPage = () => {

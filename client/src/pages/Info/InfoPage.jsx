@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useNavigate, useParams } from "react-router-dom";
-import { Btn } from "../components/Btn";
+import { Btn } from "../../components/Btn";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { customFetch } from "../utils/customFetch";
-import { setSingleContent } from "../store/contentSlice";
+import { customFetch } from "../../utils/customFetch";
+import { setSingleContent } from "../../store/contentSlice";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import "./styles.scss";
+import "./Info.scss";
 
 export const InfoPage = () => {
   const { singleContent } = useSelector(state => state.contentSlice);

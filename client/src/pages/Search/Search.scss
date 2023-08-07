@@ -1,0 +1,54 @@
+.searchPage {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+
+        .searchedItems {
+            width: 100vw;
+        }
+    }
+
+    .filter {
+        width: 20vw;
+
+        ul {
+            list-style-type: none;
+            text-align: start;
+            cursor: pointer;
+
+            li {
+
+                &:hover {
+                    color: red;
+                }
+            }
+        }
+    }
+
+    .searchedItems {
+        width: 80vw;
+
+        h2 {
+            margin-left: 20px;
+            text-align: start;
+        }
+
+        .items {
+            display: flex;
+            flex-wrap: wrap;
+
+            .item {
+                margin: 10px;
+
+                img {
+                    width: 175px;
+                    height: 120px;
+                }
+            }
+        }
+    }
+}

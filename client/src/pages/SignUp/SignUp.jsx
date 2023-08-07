@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom"
-import { Btn } from "../components/Btn"
-import { Input } from "../components/Input"
-import Title from "../components/Title"
-import  { createUser } from "../store/signUpSlice"
+import { Btn } from "../../components/Btn"
+import { Input } from "../../components/Input"
+import Title from "../../components/Title"
+import  { createUser } from "../../store/signUpSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
-import { NetflixLogo } from "../components/NetflixLogo"
-import "./styles.scss";
+import { NetflixLogo } from "../../components/NetflixLogo"
+import "./SignUp.scss";
 
 export const SignUp = () => {
 
