@@ -16,7 +16,7 @@ export const InfoPage = () => {
   const { _id } = params;
   // console.log("id: ", _id);
   
-  const navToWatch = () => navigate(`/content/${singleContent._id}/trailer`);
+  const navToWatch = () => navigate(`/content/${singleContent._id}/movie`);
   const getSingleContent = async (id) => {
     try {
       const singleContent = await customFetch(`content/${id}`, "GET");

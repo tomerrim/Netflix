@@ -15,7 +15,7 @@ export const RandomContent = ({content}) => {
     const navToInfo = () => navigate(`/content/${content._id}`);
     const navToWatch = () => {
       dispatch(setSingleContent(content));
-      navigate(`/content/${content._id}/trailer`);
+      navigate(`/content/${content._id}/movie`);
     }
     const shorter = (item) => {
       return item && item.length > 250 ? item.substring(0, 250) + "..." : item;

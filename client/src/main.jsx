@@ -30,7 +30,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <Route path="/content/:_id" element={<InfoPage />} />
                 <Route path='/search' element={<SearchPage/>}/>
               </Route>
-              <Route path="/content/:_id/trailer" element={<WatchPage />} />
+              <Route path="/content/:_id/movie" element={<WatchPage />} />
             </Routes>
           </main>
         </BrowserRouter>

@@ -13,7 +13,7 @@ export const WatchPage = () => {
     return (
         <div className="watchPage">
             <Btn onClick={navToInfo} className={"back"}><ArrowBackOutlinedIcon/></Btn>
-            <ReactPlayer url={singleContent.trailer} controls={true} width={"100%"} height={"100%"} playing={"true"} className ={"trailer"}/>
+            <ReactPlayer url={singleContent.movie} controls={true} width={"100%"} height={"100%"} playing={"true"} className ={"movie"}/>
         </div>
     )
 }
