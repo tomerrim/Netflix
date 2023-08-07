@@ -1,0 +1,28 @@
+.searchBar {
+    display: flex;
+    align-items: center;
+    background-color: transparent ;
+    color: #ffffff;
+    border: none;
+    position: relative;
+    width: 200px;
+
+    .icon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    input {
+        padding-left: 30px;
+        background-color: rgba(0,0,0,0.7);
+        border-radius: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .searchBar {
+        width: 125px;
+    }
+}

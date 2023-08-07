@@ -5,7 +5,6 @@ import Carousel from "react-multi-carousel";
 import "./CardList.scss";
 
 export const CardList = ({cards, title}) => {
-
     const responsive = {
         superLargeDesktop: {
             breakpoint: { max: 4000, min: 3000 },

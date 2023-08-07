@@ -18,32 +18,36 @@
 
 .contentCard {
     // Basic styling for the card container
+    //position: relative;
     padding: 15px;
     margin: 15px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s;
     border-radius: 10px;
+    // overflow: hidden;
     
-    // Add a hover effect for desktop
     &:hover {
+        //position: absolute;
+        // bottom: 0;
+        // z-index: 3;
+        // height: 280px;
         transform: scale(1.1);
         transform-origin: bottom;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
 
-    // Styling for the card title
     h1 {
         font-size: 20px;
         margin-bottom: 10px;
     }
 
-    // Styling for the images
     img {
         width: 100%;
         height: 250px;
         object-fit: cover;
         display: block;
         margin: 0 auto;
+        transition: all 0.3s;
     }
 
     // Mobile-specific styling
@@ -57,9 +61,6 @@
         img {
             width: 100%;
             height: 200px;
-            object-fit: cover;
-            max-width: 100%;
-            display: block;
         }
     }
 
@@ -69,9 +70,6 @@
         img {
             width: 100%;
             height: 180px;
-            object-fit: cover;
-            max-width: 100%;
-            display: block;
         }
     }
 }

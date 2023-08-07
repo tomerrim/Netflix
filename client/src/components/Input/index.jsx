@@ -2,7 +2,7 @@
 import { useState } from "react";
 import "./Input.scss";
 
-export const Input = ({ type, placeholder, name, value, className, onChange }) => {
+export const Input = ({ type, placeholder, name, value, className, onChange, autoFocus }) => {
 
     const [showPassword, setShowPassword] = useState(false);
     const inputType = showPassword ? "text" : type || "text";
@@ -15,6 +15,7 @@ export const Input = ({ type, placeholder, name, value, className, onChange }) =
             name={name}
             value={value}
             className={`input ${className}`}
-            onChange={handleChange}/>  
+            onChange={handleChange}
+            autoFocus={autoFocus}/>  
     )
 }

@@ -14,15 +14,8 @@ export const HomePage = () => {
   const [randomIndex, setRandomIndex] = useState(null);
   const { content, movies, series } = useSelector(state => state.contentSlice);
   const {user, isLoggedIn } = useSelector((state) => state.userSlice);
-  const userFavoritesIds = useSelector(state =>state.userSlice.user && state.userSlice.user.favoritesList); 
-  //fixed by adding state.userSlice.user &&
 
-  let userFavorites = [];
-  if (userFavoritesIds) {
-    userFavorites = userFavoritesIds.map((favId) => {
-      return content.find((c) => c._id === favId);
-    })
-  } 
+
   // console.log(user);
   // let data;
 
@@ -55,7 +48,6 @@ export const HomePage = () => {
   useEffect(() => {
     console.log("fetch data")
     fetchAllContent();
-    // updateRandomIndex(data.length);
   }, []);
 
   useEffect(() => {
@@ -66,23 +58,13 @@ export const HomePage = () => {
     return () => clearInterval(interval);
   },[content]);
 
-  // console.log("content: ",content);
-
-  // const navigate = useNavigate();
-  // const user = useSelector(state => state.userSlice.user);
-  // useEffect(() => {
-  // if (!user) {
-  //     navigate("/signIn");
-  // }
-  // }, [user]);
-
   return (
     <>
     <Title title={"Netflix"}/>
     <div className="homePage">
       { content[randomIndex] && <RandomContent content={content[randomIndex]}/>}
-      { isLoggedIn && userFavorites.length > 0 && <CardList cards={userFavorites} title={"Favorites"}/> }
-      { isLoggedIn && user && <CardList cards={user.watchList} title={"Watch List"}/> }
+      { isLoggedIn && user.favoritesList.length > 0 && <CardList cards={user.favoritesList} title={`${user.username}'s List`}/> }
+      { isLoggedIn && user.watchList.length > 0 && <CardList cards={user.watchList} title={"Watch List"}/> }
       <CardList cards={content} title={"All Content"}/>
       <CardList cards={movies} title={"All Movies"}/>
       <CardList cards={series} title={"All Series"}/>

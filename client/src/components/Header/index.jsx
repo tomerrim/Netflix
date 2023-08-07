@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import "./Header.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "../../store/userSlice";
+import SearchIcon from "@mui/icons-material/Search";
+import { SearchBar } from "../SearchBar";
 
 const HEADER_ITEMS = [
     { title: "Movies", path: "/movies" },
@@ -16,12 +18,16 @@ export const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [scrolled, setScrolled] = useState(false);
+    const [showSearchBar, setShowSearchBar] = useState(false);
     const user = useSelector(state => state.userSlice.user);
-    console.log("user: ",user)
 
     const signOutClick = () => {
       dispatch(signOut());
       navigate("/signin");
+    }
+
+    const showSearch = () => {
+      setShowSearchBar(!showSearchBar);
     }
 
     useEffect(()=>{
@@ -51,6 +57,9 @@ export const Header = () => {
                   <Link to={item.path}>{item.title}</Link>
                 </div>
               ))}
+            </div>
+            <div className="search" onClick={showSearch}>
+              { showSearchBar ? <SearchBar/> : <SearchIcon/>}
             </div>
             <div className="user">
               {user && <h3>{user.username}</h3>}

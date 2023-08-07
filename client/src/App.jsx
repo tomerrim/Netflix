@@ -33,7 +33,7 @@ function App() {
     if (!user) {
       navigate("/signIn");
     }
-  }, [user]);
+  }, [user,navigate]);
 
   return (
     <div className="App">

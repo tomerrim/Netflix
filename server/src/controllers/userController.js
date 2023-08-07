@@ -35,8 +35,8 @@ export const signIn = async (req, res) => {
                     _id: user._id,
                     username: user.username,
                     email: user.email,
-                    favoritesList: [],
-                    watchList: [],
+                    favoritesList: user.favoritesList,
+                    watchList: user.watchList,
                 },
                 token:generateToken(user),
             })
@@ -65,4 +65,4 @@ export const toggleFavorite = async (req, res) => {
     res.json({favoritesList: user.favoritesList});
 }
 
-export const getUserByEmail = (email) => User.findOne({email});
+export const getUserByEmail = (email) => User.findOne({ email }).populate("favoritesList");

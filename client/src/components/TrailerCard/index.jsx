@@ -10,13 +10,17 @@ import "./TrailerCard.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 export const TrailerCard = ({content}) => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const user = useSelector(state => state.userSlice.user);
     const [play, setPlay] = useState(false);
 
     const isFavorite = user.favoritesList.includes(content._id);
+
+    const navToInfo = () => navigate(`/content/${content._id}`);
 
     const handleFavoriteToggle = () => {
         dispatch(toggleFavorite(content._id));
@@ -37,7 +41,7 @@ export const TrailerCard = ({content}) => {
                 <Btn><ThumbDownOutlinedIcon /></Btn>
                 <Btn><ThumbUpOutlinedIcon /></Btn>
             </div>
-            <div className="info">
+            <div className="info" onClick={navToInfo}>
                 <p>
                     {content.duration}
                     <span className="age">+{content.limit}</span> 
