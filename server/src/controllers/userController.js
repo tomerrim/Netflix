@@ -43,7 +43,7 @@ export const signIn = async (req, res) => {
             return;
         }
     }
-    res.status(401).send({message: "Invalid Credentials"});
+    res.status(401).send("Invalid Credentials");
 };
 
 export const toggleFavorite = async (req, res) => {

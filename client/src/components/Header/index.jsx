@@ -86,22 +86,17 @@ export const Header = () => {
                 </div>
                 <div className="user">{user && <h3>{user.username}</h3>}</div>
                 <div className="menu" onClick={toggleMenu}>
-                  {menuOpen ? (
-                  <>
-                    <div className="">
-                      {HEADER_ITEMS.map((item) => (
-                        <div key={item.path} className="item">
-                          <Link to={item.path}>{item.title}</Link>
-                        </div>
-                      ))}
+                  <MenuIcon />
+                </div>
+                <div className={`dropdown ${menuOpen ? "open" : ""}`}>
+                  {HEADER_ITEMS.map((item) => (
+                    <div key={item.path} className="item">
+                      <Link to={item.path}>{item.title}</Link>
                     </div>
-                    <Btn className={"signOut"} onClick={signOutClick}>
-                      Sign Out
-                    </Btn>
-                  </> 
-                  ) : ( 
-                   <MenuIcon/>
-                  )}
+                  ))}
+                  <Btn className={"signOut"} onClick={signOutClick}>
+                    Sign Out
+                  </Btn>
                 </div>
               </div>
             </nav>

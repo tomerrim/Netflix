@@ -37,6 +37,15 @@ header {
             }
         }
 
+        .menu {
+            display: none;
+
+            @media screen and (max-width: 768px) {
+                display: flex;
+                margin-left: auto;
+            }
+        }
+
         .search {
             padding-top: 10px;
             padding-left: 10px;
@@ -54,6 +63,40 @@ header {
                 background-color: red;
                 color: #ffffff;
             }
+        }
+
+        .dropdown {
+            display: none;
+            position: fixed;
+            top: 80px; // header height
+            right: 0;
+            width: 200px; // you can adjust this
+            background-color: #000000;
+            color: #ffffff;
+            flex-direction: column;
+            gap: 15px;
+
+            .item {
+                color: #ffffff;
+                padding: 10px;
+            }
+        
+            .signOut {
+                margin: 5px;
+                background-color: red;
+                color: #ffffff;
+                padding: 10px;
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        .dropdown.open {
+            display: flex;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: rgba(0,0,0, 0.8);
+            margin-right: 20px;
         }
 
         @media screen and (max-width:768px) {

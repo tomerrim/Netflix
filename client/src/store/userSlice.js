@@ -61,7 +61,7 @@ export const userSlice = createSlice({
         })
         .addCase(fetchuser.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.payload.error.message;
+            state.error = action.error;
         })
         .addCase(toggleFavorite.fulfilled, (state, action) => {
           state.user.favoritesList = action.payload.favoritesList;
