@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Search.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import queryString from "query-string";
 
 const FILTERS = [
     "All Genres",
@@ -15,7 +16,9 @@ const FILTERS = [
 
 export const SearchPage = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { movies, series } = useSelector(state => state.contentSlice);
+    const [searchQuery, setSearchQuery] = useState("");
     const [filteredMovies, setFilteredMovies] = useState(movies);
     const [filteredSeries, setFilteredSeries] = useState(series);
 
@@ -26,9 +29,31 @@ export const SearchPage = () => {
         } else {
             setFilteredMovies(movies.filter((m) => m.genre === filter));
             setFilteredSeries(series.filter((s) => s.genre === filter));
-        }
-        
+        }   
     }
+
+    useEffect(() => {
+        const { query } = queryString.parse(location.search);
+        setSearchQuery(query || "");
+    }, [location.search]);
+
+    useEffect(() => {
+        const query = searchQuery.toLowerCase();
+
+        if(query === "") {
+            setFilteredMovies(movies);
+            setFilteredSeries(series);
+        } else {
+            const filterString = content =>
+             content.title.toLowerCase().includes(query) ||
+             content.year.includes(query) ||
+             content.limit.toLowerCase().includes(query) ||
+             content.genre.toLowerCase().includes(query);
+
+            setFilteredMovies(movies.filter(filterString));
+            setFilteredSeries(series.filter(filterString));
+        }
+    },[searchQuery, movies, series])
 
     return (
         <div className="searchPage">

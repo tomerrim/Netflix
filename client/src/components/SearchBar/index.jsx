@@ -5,7 +5,10 @@ import "./searchBar.scss";
 
 export const SearchBar = () => {
     const navigate = useNavigate();
-    const navToSearch = () => navigate("/search");
+    const navToSearch = (e) => {
+        const query = e.target.value;
+        navigate(`/search?query=${query}`);
+    }
 
     return (
         <div className="searchBar">
