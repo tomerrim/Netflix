@@ -27,7 +27,7 @@ export const ContentCard = ({ content }) => {
        onMouseEnter={() => setIsHovered(true)}
        onMouseLeave={() => setIsHovered(false)}
        >
-        {isHovered ? (
+        {isHovered && !isMobile ? (
           <TrailerCard content={content}/>
           ) : (
             <img

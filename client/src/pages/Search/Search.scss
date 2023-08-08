@@ -1,19 +1,42 @@
 .searchPage {
     display: flex;
-    flex-direction: column;
-    width: 100vw;
+    flex-direction: row;
+    width: 95vw;
     height: 100vh;
 
-    @media screen and (min-width: 768px) {
-        flex-direction: row;
+    @media screen and (max-width: 768px) {
+        flex-direction: column; 
 
         .searchedItems {
-            width: 100vw;
+            
+            h2 {
+                display: flex;
+                justify-content: center;
+            }
+
+            .items {
+                justify-content: center;
+            }
+        }
+
+        .filter {
+            margin-right: 0;
+            
+            ul {
+                display: flex;
+                justify-content: center;
+                text-align: center;
+                flex-wrap: wrap;
+
+                li {
+                    margin: 10px;
+                }
+            }
         }
     }
 
     .filter {
-        width: 20vw;
+        margin-right: 50px;
 
         ul {
             list-style-type: none;
@@ -30,7 +53,6 @@
     }
 
     .searchedItems {
-        width: 80vw;
 
         h2 {
             margin-left: 20px;
