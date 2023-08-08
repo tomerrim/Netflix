@@ -65,4 +65,24 @@ export const toggleFavorite = async (req, res) => {
     res.json({favoritesList: user.favoritesList});
 }
 
-export const getUserByEmail = (email) => User.findOne({ email }).populate("favoritesList");
+export const addToWatchList = async (req, res) => {
+    const userId = req.body.user._id;
+    const contentId = req.body.content._id;
+    const stoppedAt = req.body.stoppedAt;
+    
+    const user = await User.findById(userId);
+    user.watchList.push({content: contentId, stoppedAt});
+    await user.save();
+    res.json({success: true});
+}
+
+export const getWatchList = async (req,res) => {
+    const userId = req.body.user._id;
+    const user = await User.findById(userId).populate("watchList.content");
+    res.json(user.watchList);
+}
+
+export const getUserByEmail = (email) =>
+  User.findOne({ email })
+    .populate("favoritesList")
+    .populate("watchList.content");

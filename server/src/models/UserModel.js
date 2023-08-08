@@ -6,7 +6,10 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   profilePicture: { type: String },
   favoritesList: [{ type: Schema.Types.ObjectId, ref: "Content" }],
-  watchList: [{ type: Schema.Types.ObjectId, ref: "Content" }],
+  watchList: [{
+    content: { type: Schema.Types.ObjectId, ref: "Content" },
+    stoppedAt: { type: Number, default: 0 }
+  }],
 });
 
 const User = mongoose.model('User', userSchema);

@@ -6,14 +6,10 @@ header {
     height: 80px;
     background-color: transparent ;
     transition: background-color 0.3s ease;
-}
-
-.top {
-    background-color: transparent ;
-}
-
-.scrolled {
-    background-color: #000000;
+    
+    &.scrolled {
+        background-color: #000000;
+    }
 }
 
 .nav {
@@ -24,6 +20,10 @@ header {
         display: flex;
         align-items: center;
         margin: 0 auto;
+
+        .dropdown-menu {
+            display: none;
+        }
 
         .itemslist {
             display: flex;
@@ -53,6 +53,34 @@ header {
                 margin: 5px;
                 background-color: red;
                 color: #ffffff;
+            }
+        }
+
+        @media screen and (max-width:768px) {
+            .itemslist, .user {
+                display: none;
+            }
+
+            .menu {
+                display: block;
+                border-radius: 10px;
+                margin-left: auto;
+
+                button {
+                    background-color: transparent ;
+                    color: red;
+                }
+
+                .dropdown-menu {
+                    display: flex;
+                    flex-direction: columns;
+                    background-color: #000000;
+                    color: #ffffff;
+
+                    .item {
+                        color: #ffffff;
+                    }
+                }
             }
         }
     }

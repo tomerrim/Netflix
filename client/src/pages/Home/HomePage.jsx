@@ -14,7 +14,7 @@ export const HomePage = () => {
   const [randomIndex, setRandomIndex] = useState(null);
   const { content, movies, series } = useSelector(state => state.contentSlice);
   const {user, isLoggedIn } = useSelector((state) => state.userSlice);
-
+  const [watchList, setWatchList] = useState([]);
 
   // console.log(user);
   // let data;
@@ -40,15 +40,30 @@ export const HomePage = () => {
     }
   }
 
+  const fetchWatchList = async () => {
+    try {
+
+      const response = await customFetch(`users/watchlist/${user._id}`, "GET", null, {
+        Authorization: `Bearer ${user.token}` 
+      });
+      setWatchList(response);
+    } catch (error) {
+      console.log("Failed to fetch watch list");
+    }
+  }
+
   const updateRandomIndex = (length) => {
     const randIndex = Math.floor(Math.random() * length);
     setRandomIndex(randIndex);
   }
 
   useEffect(() => {
-    console.log("fetch data")
-    fetchAllContent();
-  }, []);
+    if (isLoggedIn) {
+      console.log("fetch data")
+      fetchAllContent();
+      fetchWatchList();
+    }
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,7 +79,7 @@ export const HomePage = () => {
     <div className="homePage">
       { content[randomIndex] && <RandomContent content={content[randomIndex]}/>}
       { isLoggedIn && user.favoritesList.length > 0 && <CardList cards={user.favoritesList} title={`${user.username}'s List`}/> }
-      { isLoggedIn && user.watchList.length > 0 && <CardList cards={user.watchList} title={"Watch List"}/> }
+      { isLoggedIn && watchList.length > 0 && <CardList cards={watchList} title={"Watch List"}/> }
       <CardList cards={content} title={"All Content"}/>
       <CardList cards={movies} title={"All Movies"}/>
       <CardList cards={series} title={"All Series"}/>
