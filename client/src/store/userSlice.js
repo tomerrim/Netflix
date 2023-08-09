@@ -2,7 +2,6 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../utils/customFetch";
 
 export const fetchuser = createAsyncThunk("userSlice/fetchUser", async (data) => {
-    console.log("data: ", data)
     if (data.email && data.password) {
         return await customFetch("users/signin", "POST", data);
     } else {
@@ -21,6 +20,26 @@ export const toggleFavorite = createAsyncThunk("userSlice/toggleFavorite", async
   );
   return response;
 })
+
+export const toggleWatchList = createAsyncThunk(
+  "userSlice/toggleWatchList",
+  async ({ contentId, stoppedAt }, thunkAPI) => {
+    const token = thunkAPI.getState().userSlice.token;
+    if (!token) {
+      return thunkAPI.rejectWithValue("Token not found");
+    }
+
+    const body = JSON.stringify({ contentId, stoppedAt });
+    const response = await customFetch(
+      `users/toggle-watch/${contentId}`,
+      "POST",
+      body,
+      { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
+    );
+
+    return response;
+  }
+);
 
 export const userSlice = createSlice({
   name: "userSlice",
@@ -65,6 +84,9 @@ export const userSlice = createSlice({
         })
         .addCase(toggleFavorite.fulfilled, (state, action) => {
           state.user.favoritesList = action.payload.favoritesList;
+        })
+        .addCase(toggleWatchList.fulfilled, (state, action) => {
+          state.user.watchList = action.payload.watchList;
         })
   }
 });

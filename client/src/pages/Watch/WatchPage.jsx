@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ReactPlayer from "react-player";
 import "./Watch.scss";
 import { useNavigate } from "react-router-dom";
@@ -6,9 +6,11 @@ import { Btn } from "../../components/Btn";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import { customFetch } from "../../utils/customFetch";
 import { useState } from "react";
+import { toggleWatchList } from "../../store/userSlice";
 
 export const WatchPage = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { singleContent } = useSelector((state) => state.contentSlice);
     const { user } = useSelector((state) => state.userSlice);
     const [currentTime, setCurrentTime] = useState(0);
@@ -20,14 +22,18 @@ export const WatchPage = () => {
 
     const handleVideoPause= () => {
         const stoppedAt = Math.floor(currentTime);
-        const userId = user._id;
+        // const userId = user._id;
         const contentId = singleContent._id;
-        customFetch(
-          "users/watchList/add",
-          "POST",
-          JSON.stringify({ userId, contentId, stoppedAt }),
-          { "Content-Type": "application/json" }
-        );
+        dispatch(toggleWatchList({contentId, stoppedAt}));
+        // customFetch(
+        //   `users/toggle-watch/${contentId}`,
+        //   "POST",
+        //   JSON.stringify({ userId, contentId, stoppedAt }),
+        //   { 
+        //     "Content-Type": "application/json",
+        //     "Autorization": `Bearer ${user.token}`
+        //   }
+        // );
     }
 
     return (

@@ -15,7 +15,7 @@ export const HomePage = ({contentType = "all"}) => {
   const [randomIndex, setRandomIndex] = useState(null);
   const { content, movies, series } = useSelector(state => state.contentSlice);
   const {user, isLoggedIn } = useSelector((state) => state.userSlice);
-  const [watchList, setWatchList] = useState([]);
+  // const [watchList, setWatchList] = useState([]);
 
   // console.log(user);
   // let data;
@@ -45,17 +45,17 @@ export const HomePage = ({contentType = "all"}) => {
     }
   }
 
-  const fetchWatchList = async () => {
-    try {
+  // const fetchWatchList = async () => {
+  //   try {
 
-      const response = await customFetch(`users/watchlist/${user._id}`, "GET", null, {
-        Authorization: `Bearer ${user.token}` 
-      });
-      setWatchList(response);
-    } catch (error) {
-      console.log("Failed to fetch watch list");
-    }
-  }
+  //     const response = await customFetch(`users/watchlist/${user._id}`, "GET", null, {
+  //       Authorization: `Bearer ${user.token}` 
+  //     });
+  //     setWatchList(response);
+  //   } catch (error) {
+  //     console.log("Failed to fetch watch list");
+  //   }
+  // }
 
   const updateRandomIndex = (length) => {
     const randIndex = Math.floor(Math.random() * length);
@@ -66,7 +66,7 @@ export const HomePage = ({contentType = "all"}) => {
     if (isLoggedIn) {
       console.log("fetch data")
       fetchAllContent();
-      fetchWatchList();
+      // fetchWatchList();
     }
   }, [isLoggedIn]);
 
@@ -78,7 +78,11 @@ export const HomePage = ({contentType = "all"}) => {
     return () => clearInterval(interval);
   },[content]);
 
-  console.log("content type: ", contentType);
+  console.log("content type: ", contentType)
+  console.log("fav list: ", user.favoritesList.length);
+  console.log("watch list: ", user.watchList);
+
+  const watchListContent = user.watchList.map(item => item.content);
 
   return (
     <>
@@ -86,10 +90,10 @@ export const HomePage = ({contentType = "all"}) => {
     <div className="homePage">
       { content[randomIndex] && <RandomContent content={content[randomIndex]}/>}
       { isLoggedIn && user.favoritesList.length > 0 && <CardList cards={user.favoritesList} title={`${user.username}'s List`}/> }
-      { isLoggedIn && watchList.length > 0 && <CardList cards={watchList} title={"Watch List"}/> }
-      {(contentType === "all" || !contentType) && <CardList cards={content} title={"All Content"}/>}
-      {(contentType === "movies" || contentType === "all") && <CardList cards={movies} title={"All Movies"}/>}
-      {(contentType === "series" || contentType === "all") && <CardList cards={series} title={"All Series"}/>}
+      { isLoggedIn && user.watchList.length > 0 && <CardList cards={watchListContent} title={"Watch List"}/> }
+      { (contentType === "all" || !contentType) && <CardList cards={content} title={"All Content"}/> }
+      { (contentType === "movies" || contentType === "all") && <CardList cards={movies} title={"All Movies"}/> }
+      { (contentType === "series" || contentType === "all") && <CardList cards={series} title={"All Series"}/> }
     </div>
     </>
   );

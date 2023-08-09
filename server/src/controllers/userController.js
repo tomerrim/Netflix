@@ -61,25 +61,44 @@ export const toggleFavorite = async (req, res) => {
     }
 
     await user.save();
+    await user.populate("favoritesList");
 
     res.json({favoritesList: user.favoritesList});
 }
 
-export const addToWatchList = async (req, res) => {
-    const userId = req.body.user._id;
-    const contentId = req.body.content._id;
-    const stoppedAt = req.body.stoppedAt;
+// export const addToWatchList = async (req, res) => {
+//     const userId = req.body.user._id;
+//     const contentId = req.body.content._id;
+//     const stoppedAt = req.body.stoppedAt;
     
-    const user = await User.findById(userId);
-    user.watchList.push({content: contentId, stoppedAt});
-    await user.save();
-    res.json({success: true});
-}
+//     const user = await User.findById(userId);
+//     user.watchList.push({content: contentId, stoppedAt});
+//     await user.save();
+//     res.json({success: true});
+// }
 
-export const getWatchList = async (req,res) => {
-    const userId = req.body.user._id;
-    const user = await User.findById(userId).populate("watchList.content");
-    res.json(user.watchList);
+// export const getWatchList = async (req,res) => {
+//     const userId = req.body.user._id;
+//     const user = await User.findById(userId).populate("watchList.content");
+//     res.json(user.watchList);
+// }
+
+export const toggleWatchList = async (req, res) => {
+    const userId = req.user._id;
+    const contentId = req.params.contentId;
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).send("User Not Found");
+    const index = user.watchList.findIndex(watchItem => watchItem.content.toString() === contentId);
+    if (index === -1) {
+        user.watchList.push({content:contentId, stoppedAt: 0});
+    } else {
+        user.watchList.splice(index,1);
+    }
+
+    await user.save();
+    await user.populate("watchList.content");
+
+    res.json({watchList: user.watchList});
 }
 
 export const getUserByEmail = (email) =>
