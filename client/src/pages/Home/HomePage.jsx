@@ -90,7 +90,7 @@ export const HomePage = ({contentType = "all"}) => {
     <div className="homePage">
       { content[randomIndex] && <RandomContent content={content[randomIndex]}/>}
       { isLoggedIn && user.favoritesList.length > 0 && <CardList cards={user.favoritesList} title={`${user.username}'s List`}/> }
-      { isLoggedIn && user.watchList.length > 0 && <CardList cards={watchListContent} title={"Watch List"}/> }
+      { isLoggedIn && user.watchList.length > 0 && <CardList cards={watchListContent} title={"Continue to Watch"}/> }
       { (contentType === "all" || !contentType) && <CardList cards={content} title={"All Content"}/> }
       { (contentType === "movies" || contentType === "all") && <CardList cards={movies} title={"All Movies"}/> }
       { (contentType === "series" || contentType === "all") && <CardList cards={series} title={"All Series"}/> }

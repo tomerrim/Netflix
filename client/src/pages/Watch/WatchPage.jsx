@@ -4,7 +4,7 @@ import "./Watch.scss";
 import { useNavigate } from "react-router-dom";
 import { Btn } from "../../components/Btn";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
-import { customFetch } from "../../utils/customFetch";
+// import { customFetch } from "../../utils/customFetch";
 import { useState } from "react";
 import { toggleWatchList } from "../../store/userSlice";
 
@@ -12,7 +12,7 @@ export const WatchPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { singleContent } = useSelector((state) => state.contentSlice);
-    const { user } = useSelector((state) => state.userSlice);
+    // const { user } = useSelector((state) => state.userSlice);
     const [currentTime, setCurrentTime] = useState(0);
     const navToInfo = () => navigate(`/content/${singleContent._id}`);
 
