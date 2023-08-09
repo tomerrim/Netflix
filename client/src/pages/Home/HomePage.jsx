@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import {  useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router-dom";
@@ -8,7 +9,7 @@ import { RandomContent } from "../../components/RandomContent";
 import "./Home.scss";
 import Title from "../../components/Title";
 
-export const HomePage = () => {
+export const HomePage = ({contentType = "all"}) => {
   const dispatch= useDispatch();
   // const navigate = useNavigate();
   const [randomIndex, setRandomIndex] = useState(null);
@@ -32,8 +33,12 @@ export const HomePage = () => {
       const allContent = await customFetch("content", "GET");
       //console.log("all content:", allContent)
       dispatch(setContent(allContent));
-      dispatch(setMovies(allContent));
-      dispatch(setSeries(allContent))
+      if (contentType === "movies" || contentType === "all") {
+        dispatch(setMovies(allContent));
+      }
+      if (contentType === "series" || contentType === "all") {
+        dispatch(setSeries(allContent))
+      }
       updateRandomIndex(allContent.length);
     } catch (error) {
       console.log("Failed to fetch content");
@@ -73,6 +78,8 @@ export const HomePage = () => {
     return () => clearInterval(interval);
   },[content]);
 
+  console.log("content type: ", contentType);
+
   return (
     <>
     <Title title={"Netflix"}/>
@@ -80,9 +87,9 @@ export const HomePage = () => {
       { content[randomIndex] && <RandomContent content={content[randomIndex]}/>}
       { isLoggedIn && user.favoritesList.length > 0 && <CardList cards={user.favoritesList} title={`${user.username}'s List`}/> }
       { isLoggedIn && watchList.length > 0 && <CardList cards={watchList} title={"Watch List"}/> }
-      <CardList cards={content} title={"All Content"}/>
-      <CardList cards={movies} title={"All Movies"}/>
-      <CardList cards={series} title={"All Series"}/>
+      {(contentType === "all" || !contentType) && <CardList cards={content} title={"All Content"}/>}
+      {(contentType === "movies" || contentType === "all") && <CardList cards={movies} title={"All Movies"}/>}
+      {(contentType === "series" || contentType === "all") && <CardList cards={series} title={"All Series"}/>}
     </div>
     </>
   );

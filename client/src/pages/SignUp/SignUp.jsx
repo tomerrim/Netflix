@@ -50,6 +50,7 @@ export const SignUp = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
           <Input
+            type={"email"}
             className={"signUpInput"}
             placeholder={"Email Address"}
             value={email} 

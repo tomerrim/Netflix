@@ -13,6 +13,7 @@ import { InfoPage } from './pages/Info/InfoPage.jsx'
 import { store } from "./store"
 import { WatchPage } from './pages/Watch/WatchPage.jsx'
 import { SearchPage } from './pages/Search/SearchPage.jsx'
+import { ContentPage } from './pages/ContentPage.jsx'
 
 axios.defaults.baseURL = "http://localhost:8000/api";
 
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <Route path="/signin" element={<SignIn />} />
               <Route path="/" element={<App />}>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/:contentType" element={<ContentPage/>}/>
                 <Route path="/content/:_id" element={<InfoPage />} />
                 <Route path='/search' element={<SearchPage/>}/>
               </Route>

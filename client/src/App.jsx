@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     if (!user) {
       navigate("/signIn");
-    }
+    } 
   }, [user,navigate]);
 
   return (
