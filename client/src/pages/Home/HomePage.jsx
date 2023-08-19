@@ -78,11 +78,11 @@ export const HomePage = ({contentType = "all"}) => {
     return () => clearInterval(interval);
   },[content]);
 
-  console.log("content type: ", contentType)
-  console.log("fav list: ", user.favoritesList.length);
-  console.log("watch list: ", user.watchList);
+  // console.log("content type: ", contentType)
+  // console.log("fav list: ", user.favoritesList.length);
+  // console.log("watch list: ", user.watchList);
 
-  const watchListContent = user.watchList.map(item => item.content);
+  const watchListContent = user?.watchList.map(item => item.content);
 
   return (
     <>
