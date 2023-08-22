@@ -11,7 +11,10 @@
     },
     "verbose": true,
     "testMatch": ["**/__tests__/**/*.mjs", "**/?(*.)+(spec|test).mjs"],
-    "moduleFileExtensions": ["js", "mjs"]
+    "moduleFileExtensions": ["js", "mjs"],
+    "moduleNameMapper": {
+      "^mongoose/.*": "<rootDir>/node_modules/mongoose/dist/index.js" 
+    }
   },
   "scripts": {
     "start": "node server.js",

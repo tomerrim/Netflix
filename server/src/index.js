@@ -14,4 +14,9 @@ app.use("/api/users", userRouter);
 app.use("/api/seedData", seedRouter);
 app.use("/api/content", contentRouter);
 
+app.use((err, req, res, next) => {
+    console.error("Unhandled error: ", err);
+    res.status(500).send("Server error. Please try again later.")
+})
+
 export default app;

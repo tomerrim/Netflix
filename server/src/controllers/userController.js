@@ -10,6 +10,10 @@ export const signUp = async (req, res) => {
             email,
             password: bcrypt.hashSync(password, 10),
         });
+        const existingUser = await User.findOne({email});
+        if (existingUser) {
+            return res.status(409).send("Email already registered")
+        }
         const user = await newUser.save();
         res.send({
             _id: user._id,
@@ -19,10 +23,9 @@ export const signUp = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
-        return res.sendStatus(400);
+        console.log("Error during signUp: ",error);
+        return res.status(500).send("Server error. Please try again later.");
     }
-
 }
 
 export const signIn = async (req, res) => {
@@ -104,4 +107,8 @@ export const toggleWatchList = async (req, res) => {
 export const getUserByEmail = (email) =>
   User.findOne({ email })
     .populate("favoritesList")
-    .populate("watchList.content");
+    .populate("watchList.content")
+    .catch(err => {
+        console.error("Error fetching user by email: ", err);
+        return null;
+    });
