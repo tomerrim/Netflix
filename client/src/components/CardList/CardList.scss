@@ -9,6 +9,57 @@
 
     }
 
+    .topRated {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        .number {
+            font-weight: bold;
+            font-size: calc(220px);
+            background-color: transparent;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            left: -10%;
+            // bottom: 0;
+            z-index: 0;
+            text-shadow: -1px -1px 0 #d3d3d3,
+                         1px -1px 0 #d3d3d3 ,
+                         -1px 1px 0 #d3d3d3,
+                         1px 1px 0 #d3d3d3;
+            margin-right: 50px;
+
+            @media (max-width: 768px) {
+                font-size: calc(60px);
+                bottom: 5%;
+                left: 2%;
+            }
+           
+        }
+
+        .ten {
+            font-size: calc(120px);
+
+            @media (max-width: 768px) {
+                font-size: calc(60px);
+                bottom: 5%;
+                left: 2%;
+            }
+        }
+
+        .conentCard {
+            position: relative;
+            z-index: 1;
+            margin-left: 200px;
+
+            @media (max-width: 768px) {
+                margin-left: 100px;
+            }
+        }
+    }
     .carousel-item-padding-40-px {
         padding: 0 5px !important;
     }

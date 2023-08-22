@@ -6,6 +6,8 @@ export const contentSlice = createSlice({
         content: [],
         movies: [],
         series: [],
+        actionContent: [],
+        contentForKids: [],
         singleContent: null,
     },
     reducers: {
@@ -20,9 +22,15 @@ export const contentSlice = createSlice({
         },
         setSeries(state, action) {
             state.series = action.payload.filter(content => content.isSeries === true);
-        }
+        },
+        setActionContent(state, action) {
+            state.actionContent = action.payload.filter(content => content.genre === "Action");
+        },
+        setContentForKids(state, action) {
+            state.contentForKids = action.payload.filter(content => Number(content.limit) <= 12);
+        },
     }
 });
 
 export const contentReducer = contentSlice.reducer;
-export const { setContent, setSingleContent, setMovies, setSeries } = contentSlice.actions;
+export const { setContent, setSingleContent, setMovies, setSeries, setActionContent, setContentForKids } = contentSlice.actions;

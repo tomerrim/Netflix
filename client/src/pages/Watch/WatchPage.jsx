@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { Btn } from "../../components/Btn";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 // import { customFetch } from "../../utils/customFetch";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toggleWatchList } from "../../store/userSlice";
+import { convertDurationToSeconds } from "../../utils/helpers";
 
 export const WatchPage = () => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ export const WatchPage = () => {
     const { singleContent } = useSelector((state) => state.contentSlice);
     // const { user } = useSelector((state) => state.userSlice);
     const [currentTime, setCurrentTime] = useState(0);
+    const playerRef = useRef(null);
     const navToInfo = () => navigate(`/content/${singleContent._id}`);
 
     const handleProgress = (progress) => {
@@ -35,6 +37,15 @@ export const WatchPage = () => {
         //   }
         // );
     }
+
+    const contentDurationSeconds = convertDurationToSeconds(singleContent.duration);
+
+    useEffect(() => {
+        if(singleContent.stoppedAt && playerRef.current) {
+            const statrtPosition = singleContent.stoppedAt / contentDurationSeconds;
+            playerRef.current.seekTo(statrtPosition, "fraction");
+        }
+    },[singleContent])
 
     return (
         <div className="watchPage">
