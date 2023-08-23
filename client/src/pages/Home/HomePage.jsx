@@ -86,7 +86,7 @@ export const HomePage = ({contentType = "all"}) => {
   useEffect(() => {
     const interval = setInterval(() => {
       updateRandomIndex(content.length);
-    }, 20000);
+    }, 10000);
 
     return () => clearInterval(interval);
   },[content]);

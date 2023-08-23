@@ -15,6 +15,7 @@ export const WatchPage = () => {
     const { singleContent } = useSelector((state) => state.contentSlice);
     // const { user } = useSelector((state) => state.userSlice);
     const [currentTime, setCurrentTime] = useState(0);
+    const [playing, setPlaying] = useState(true);
     const playerRef = useRef(null);
     const navToInfo = () => navigate(`/content/${singleContent._id}`);
 
@@ -27,6 +28,7 @@ export const WatchPage = () => {
         // const userId = user._id;
         const contentId = singleContent._id;
         dispatch(toggleWatchList({contentId, stoppedAt}));
+        setPlaying(!playing);
         // customFetch(
         //   `users/toggle-watch/${contentId}`,
         //   "POST",
@@ -38,10 +40,15 @@ export const WatchPage = () => {
         // );
     }
 
+    const handleVideoEnd = () => {
+        const contentId = singleContent._id;
+        dispatch(toggleWatchList({contentId, stoppedAt: "end"}));
+    }
+
     const contentDurationSeconds = convertDurationToSeconds(singleContent.duration);
 
     useEffect(() => {
-        if(singleContent.stoppedAt && playerRef.current) {
+        if(singleContent && "stoppedAt" in singleContent && playerRef.current) {
             const statrtPosition = singleContent.stoppedAt / contentDurationSeconds;
             playerRef.current.seekTo(statrtPosition, "fraction");
         }
@@ -55,10 +62,11 @@ export const WatchPage = () => {
              controls={true}
              width={"100%"} 
              height={"100%"} 
-             playing={"true"} 
+             playing={playing} 
              className ={"movie"}
              onProgress={handleProgress}
              onPause={handleVideoPause}
+             onEnded={handleVideoEnd}
              />
         </div>
     )

@@ -13,3 +13,7 @@ export const convertDurationToSeconds = (duration) => {
 
   return totalSeconds;
 };
+
+export const shorter = (item) => {
+  return item && item.length > 250 ? item.substring(0, 250) + "..." : item;
+};

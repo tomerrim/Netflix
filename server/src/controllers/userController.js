@@ -89,13 +89,18 @@ export const toggleFavorite = async (req, res) => {
 export const toggleWatchList = async (req, res) => {
     const userId = req.user._id;
     const contentId = req.params.contentId;
+    const stoppedAt = req.body.stoppedAt || 0;
     const user = await User.findById(userId);
     if (!user) return res.status(404).send("User Not Found");
-    const index = user.watchList.findIndex(watchItem => watchItem.content.toString() === contentId);
-    if (index === -1) {
-        user.watchList.push({content:contentId, stoppedAt: 0});
-    } else {
+
+    const watchItem = user.watchList.find(item => item.content.toString() === contentId);
+    if(!watchItem) {
+        user.watchList.push({content: contentId, stoppedAt})
+    } else if (stoppedAt === "end") {
+        const index = user.watchList.findIndex(watchItem => watchItem.content.toString() === contentId);
         user.watchList.splice(index,1);
+    } else {
+        watchList.stoppedAt = stoppedAt;
     }
 
     await user.save();

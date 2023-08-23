@@ -13,6 +13,12 @@
         display: flex;
         align-items: center;
         position: relative;
+        width: 100%;
+        margin: 5px;
+
+        > * {
+            flex: 1;
+        }
 
         .number {
             font-weight: bold;
@@ -22,41 +28,50 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: absolute;
-            left: -10%;
+            position: relative;
+            line-height: 1;
+            // left: -40%;
             // bottom: 0;
             z-index: 0;
             text-shadow: -1px -1px 0 #d3d3d3,
                          1px -1px 0 #d3d3d3 ,
                          -1px 1px 0 #d3d3d3,
                          1px 1px 0 #d3d3d3;
-            margin-right: 50px;
+            // margin-right: 50px;
+
+            @media (max-width: 1300px) {
+                font-size: calc(120px);
+            }
+
+            @media (max-width: 1024px) {
+                font-size: calc(80px);
+                position: absolute;
+                bottom: 5%;
+                left: 5%;
+                z-index: 2;
+            }
 
             @media (max-width: 768px) {
                 font-size: calc(60px);
-                bottom: 5%;
-                left: 2%;
             }
-           
         }
 
         .ten {
-            font-size: calc(120px);
-
+            font-size: calc(100px);
+            line-height: 1;
             @media (max-width: 768px) {
                 font-size: calc(60px);
                 bottom: 5%;
-                left: 2%;
+                // left: 2%;
             }
         }
 
-        .conentCard {
+        .contentCard {
             position: relative;
             z-index: 1;
-            margin-left: 200px;
 
-            @media (max-width: 768px) {
-                margin-left: 100px;
+            @media screen and (max-width:1024px) {
+                width: 100%;
             }
         }
     }

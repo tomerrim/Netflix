@@ -7,7 +7,11 @@ export const SearchBar = () => {
     const navigate = useNavigate();
     const navToSearch = (e) => {
         const query = e.target.value;
-        navigate(`/search?query=${query}`);
+        if (query === "") {
+            navigate("/")
+        } else {
+            navigate(`/search?query=${query}`);
+        }
     }
 
     return (

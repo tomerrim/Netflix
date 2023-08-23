@@ -3,16 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./Search.scss";
 import { useEffect, useState } from "react";
 import queryString from "query-string";
-
-const FILTERS = [
-    "All Genres",
-    "Action",
-    "Comedy",
-    "Fantasy",
-    "Detective",
-    "Horror",
-    "Animation"
-];
+import { FILTERS } from "../../utils/constants";
 
 export const SearchPage = () => {
     const navigate = useNavigate();

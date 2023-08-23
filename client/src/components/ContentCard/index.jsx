@@ -4,7 +4,7 @@ import "./ContentCard.scss";
 import { TrailerCard } from "../TrailerCard";
 import { useNavigate } from "react-router-dom";
 
-export const ContentCard = ({ content, progress = 0 }) => {
+export const ContentCard = ({ content, progress = 0, isTopTen = false }) => {
     const navigate = useNavigate();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [isHovered, setIsHovered] = useState(false);
@@ -30,17 +30,26 @@ export const ContentCard = ({ content, progress = 0 }) => {
       <div className={`contentCard ${isMobile ? "mobile" : "desktop"}`}
        onMouseEnter={() => setIsHovered(true)}
        onMouseLeave={() => setIsHovered(false)}
+       onClick={(e) => {
+        if(e.target === e.currentTarget) {
+          setIsHovered(false);
+        }
+       }}
        >
         {isHovered && !isMobile ? (
           <TrailerCard content={content}/>
           ) : (
             <>
               <img
-              src={isMobile ? content.imgVertical : content.imgThumb}
+              src={isMobile || isTopTen ? content.imgVertical : content.imgThumb}
               alt={content.title}
               onClick={navToInfo}
               />
-              {progress > 0 && <div className="progressBar" style={{width: `${progress}%`, backgroundColor: 'red'}}></div>}
+              {progress > 0 && (
+                <div className="progressContainer">
+                  <div className="progressBar" style={{width: `${progress}%`, backgroundColor: 'red'}}></div>
+                </div>
+                )}
             </>
           )}
       </div>

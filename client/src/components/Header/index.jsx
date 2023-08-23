@@ -8,11 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import { SearchBar } from "../SearchBar";
 import "./Header.scss";
-
-const HEADER_ITEMS = [
-    { title: "Movies", path: "/movies" },
-    { title: "Series", path: "/series" },
-]
+import { HEADER_ITEMS } from "../../utils/constants";
 
 export const Header = () => {
 

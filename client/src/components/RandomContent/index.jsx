@@ -6,6 +6,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSingleContent } from "../../store/contentSlice";
+import { shorter } from "../../utils/helpers";
 
 export const RandomContent = ({content}) => {
 
@@ -17,9 +18,6 @@ export const RandomContent = ({content}) => {
       dispatch(setSingleContent(content));
       navigate(`/content/${content._id}/movie`);
     }
-    const shorter = (item) => {
-      return item && item.length > 250 ? item.substring(0, 250) + "..." : item;
-    };
 
     const bgStyle = {
       backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%), url(${content.img})`,

@@ -22,7 +22,7 @@
     padding: 15px;
     margin: 15px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
+    transition: all 0.5s;
     border-radius: 10px;
     // overflow: hidden;
     
@@ -48,6 +48,17 @@
         display: block;
         margin: 0 auto;
         transition: all 0.3s;
+    }
+
+    .progressContainer {
+        width: 100%;
+        height: 5px;
+        background-color: #ddd;
+
+        .progressBar {
+            height: 5PX;
+            background-color: red;
+        }
     }
 
     // Mobile-specific styling
