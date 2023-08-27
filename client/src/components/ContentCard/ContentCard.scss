@@ -1,30 +1,10 @@
-// .contentCard {
-    
-//     img {
-//         width: 100%;
-//         height: 100px;
-//         object-fit: cover;
-//         max-width: 100%;
-//         display: block;
-//     }
-// }
-
-// @media (min-width: 768px) {
-//     .contentCard img {
-//         width: 80%;
-//         height: 100px;
-//     }
-// }
-
 .contentCard {
-    // Basic styling for the card container
-    // position: relative;
     padding: 15px;
     margin: 15px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.5s;
     border-radius: 10px;
-    // overflow: hidden;
+    position: relative;
     
     &:hover {
         //position: absolute;
@@ -34,6 +14,10 @@
         transform: scale(1.1);
         transform-origin: bottom;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+
+        .progressContainer {
+            height: 10px;
+        }
     }
 
     h1 {
@@ -51,6 +35,9 @@
     }
 
     .progressContainer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
         width: 100%;
         height: 5px;
         background-color: #ddd;
@@ -72,6 +59,20 @@
         img {
             width: 100%;
             height: 200px;
+        }
+
+        .progressContainer {
+            height: 3px;
+
+            .progressBar {
+                height: 3px;
+            }
+        }
+
+        &:hover {
+            .progressContainer {
+                height: 6px;
+            }
         }
     }
 

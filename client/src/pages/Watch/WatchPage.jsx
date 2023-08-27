@@ -4,18 +4,17 @@ import "./Watch.scss";
 import { useNavigate } from "react-router-dom";
 import { Btn } from "../../components/Btn";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
-// import { customFetch } from "../../utils/customFetch";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { toggleWatchList } from "../../store/userSlice";
-import { convertDurationToSeconds } from "../../utils/helpers";
 
 export const WatchPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { singleContent } = useSelector((state) => state.contentSlice);
-    // const { user } = useSelector((state) => state.userSlice);
+    const { user } = useSelector((state) => state.userSlice);
     const [currentTime, setCurrentTime] = useState(0);
     const [playing, setPlaying] = useState(true);
+    const [hasSought, setHasSought] = useState(false);
     const playerRef = useRef(null);
     const navToInfo = () => navigate(`/content/${singleContent._id}`);
 
@@ -25,19 +24,15 @@ export const WatchPage = () => {
 
     const handleVideoPause= () => {
         const stoppedAt = Math.floor(currentTime);
-        // const userId = user._id;
+        console.log("stopped at", stoppedAt);
         const contentId = singleContent._id;
-        dispatch(toggleWatchList({contentId, stoppedAt}));
+        const newWatchItem = {
+            content: singleContent,
+            stoppedAt,
+        };
+        
+        dispatch(toggleWatchList({contentId, watchItem: newWatchItem}));
         setPlaying(!playing);
-        // customFetch(
-        //   `users/toggle-watch/${contentId}`,
-        //   "POST",
-        //   JSON.stringify({ userId, contentId, stoppedAt }),
-        //   { 
-        //     "Content-Type": "application/json",
-        //     "Autorization": `Bearer ${user.token}`
-        //   }
-        // );
     }
 
     const handleVideoEnd = () => {
@@ -45,29 +40,41 @@ export const WatchPage = () => {
         dispatch(toggleWatchList({contentId, stoppedAt: "end"}));
     }
 
-    const contentDurationSeconds = convertDurationToSeconds(singleContent.duration);
+    const watchItem = user.watchList.find(item => item.content._id.toString() === singleContent._id);
+    const stoppedAtForContent = watchItem ? watchItem.stoppedAt : 0;
 
-    useEffect(() => {
-        if(singleContent && "stoppedAt" in singleContent && playerRef.current) {
-            const statrtPosition = singleContent.stoppedAt / contentDurationSeconds;
-            playerRef.current.seekTo(statrtPosition, "fraction");
+    const handlePlayerReady = () => {
+        if (!hasSought && stoppedAtForContent) {
+            if(playerRef.current && playerRef.current.seekTo) {
+                playerRef.current.seekTo(stoppedAtForContent, "seconds");
+                setHasSought(true);
+            } else {
+                console.log("playerRef or playerRef.current.seekTo is not available.");
+            }
+        } else {
+            const currentTime = playerRef.current ? playerRef.current.currentTime : 0;
+            playerRef.current.seekTo(currentTime, "seconds");
         }
-    },[singleContent])
-
+    }
+    
     return (
-        <div className="watchPage">
-            <Btn onClick={navToInfo} className={"back"}><ArrowBackOutlinedIcon/></Btn>
-            <ReactPlayer
-             url={singleContent.movie}
-             controls={true}
-             width={"100%"} 
-             height={"100%"} 
-             playing={playing} 
-             className ={"movie"}
-             onProgress={handleProgress}
-             onPause={handleVideoPause}
-             onEnded={handleVideoEnd}
-             />
-        </div>
-    )
+      <div className="watchPage">
+        <Btn onClick={navToInfo} className={"back"}>
+          <ArrowBackOutlinedIcon />
+        </Btn>
+        <ReactPlayer
+          url={singleContent.movie}
+          controls={true}
+          width={"100%"}
+          height={"100%"}
+          playing={playing}
+          className={"movie"}
+          ref={playerRef}
+          onProgress={handleProgress}
+          onPause={handleVideoPause}
+          onEnded={handleVideoEnd}
+          onReady={handlePlayerReady}
+        />
+      </div>
+    );
 }

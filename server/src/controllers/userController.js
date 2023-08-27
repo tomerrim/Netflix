@@ -50,23 +50,29 @@ export const signIn = async (req, res) => {
 };
 
 export const toggleFavorite = async (req, res) => {
-    const userId = req.user._id;
-    const contentId = req.params.contentId;
+    try {
 
-    const user = await User.findById(userId);
-    if(!user) return res.status(404).send("User Not Found");
-
-    const index = user.favoritesList.indexOf(contentId);
-    if(index === -1) {
-        user.favoritesList.push(contentId);
-    } else {
-        user.favoritesList.splice(index, 1);
+        const userId = req.user._id;
+        const contentId = req.params.contentId;
+        
+        const user = await User.findById(userId);
+        if(!user) return res.status(404).send("User Not Found");
+        
+        const index = user.favoritesList.indexOf(contentId);
+        if(index === -1) {
+            user.favoritesList.push(contentId);
+        } else {
+            user.favoritesList.splice(index, 1);
+        }
+        
+        await user.save();
+        await user.populate("favoritesList");
+        
+        res.json({favoritesList: user.favoritesList});
+    } catch (err) {
+        console.error("Error in toggleFavorite: ", err);
+        res.status(500).send("Internal Server Error");
     }
-
-    await user.save();
-    await user.populate("favoritesList");
-
-    res.json({favoritesList: user.favoritesList});
 }
 
 // export const addToWatchList = async (req, res) => {
@@ -87,26 +93,34 @@ export const toggleFavorite = async (req, res) => {
 // }
 
 export const toggleWatchList = async (req, res) => {
-    const userId = req.user._id;
-    const contentId = req.params.contentId;
-    const stoppedAt = req.body.stoppedAt || 0;
-    const user = await User.findById(userId);
-    if (!user) return res.status(404).send("User Not Found");
+    console.log("toggleWatchList endpoint hit");
+    try {
+        const userId = req.user._id;
+        const contentId = req.params.contentId;
+        const stoppedAt = req.body.watchItem.stoppedAt || 0;
+        console.log("request body: ", req.body);
+        console.log("stopped at: ",stoppedAt);
+        const user = await User.findById(userId);
+        if (!user) return res.status(404).send("User Not Found");
 
-    const watchItem = user.watchList.find(item => item.content.toString() === contentId);
-    if(!watchItem) {
-        user.watchList.push({content: contentId, stoppedAt})
-    } else if (stoppedAt === "end") {
-        const index = user.watchList.findIndex(watchItem => watchItem.content.toString() === contentId);
-        user.watchList.splice(index,1);
-    } else {
-        watchList.stoppedAt = stoppedAt;
+        const watchItem = user.watchList.find(item => item.content.toString() === contentId);
+        if(!watchItem) {
+            user.watchList.push({content: contentId, stoppedAt})
+        } else if (stoppedAt === "end") {
+            const index = user.watchList.findIndex(watchItem => watchItem.content.toString() === contentId);
+            user.watchList.splice(index,1);
+        } else {
+            watchItem.stoppedAt = stoppedAt;
+        }
+
+        await user.save();
+        await user.populate("watchList.content");
+
+        res.json({watchList: user.watchList});
+    } catch (err) {
+        console.error("Error in toggleWatchList: ", err);
+        res.status(500).send('Internal Server Error');
     }
-
-    await user.save();
-    await user.populate("watchList.content");
-
-    res.json({watchList: user.watchList});
 }
 
 export const getUserByEmail = (email) =>

@@ -3,10 +3,18 @@ import "react-multi-carousel/lib/styles.css";
 import { ContentCard } from "../ContentCard";
 import Carousel from "react-multi-carousel";
 import "./CardList.scss";
-import { convertDurationToSeconds } from "../../utils/helpers";
 import { RESPONSIVE } from "../../utils/constants";
+import { useSelector } from "react-redux";
 
 export const CardList = ({cards, title}) => {
+    
+    const { user } = useSelector((state) => state.userSlice);
+    // console.log("watch list: ", JSON.stringify(user.watchList, null, 2));
+
+    const getProgress = (cardId) => {
+      const watchItem = user.watchList.find(item => item.content._id === cardId);
+      return watchItem ? watchItem.stoppedAt : null;
+    }
     
     return (
       <div className="cardList">
@@ -28,27 +36,20 @@ export const CardList = ({cards, title}) => {
           dotListClass="custom-dot-list-style"
           itemClass="carousel-item-padding-40-px"
         >
-          {cards.map((card, index) => {
-            let progressPrecentage = 0;
-            if (title === "Continue to Watch") {
-                const contentDurationSeconds = convertDurationToSeconds(card.duration);
-                progressPrecentage = (card.stoppedAt / contentDurationSeconds) * 100;
-            }
-            return (
-              <>
-                {title === "Top 10" ? (
-                  <div className="topRated">
-                    <div className={`number ${index === 9 ? "ten" : ""}`}>
-                      {index + 1}
-                    </div>
-                    <ContentCard content={card} isTopTen={true} key={card._id} />
+          {cards.map((card, index) => (
+            <>
+              {title === "Top 10" ? (
+                <div className="topRated">
+                  <div className={`number ${index === 9 ? "ten" : ""}`}>
+                    {index + 1}
                   </div>
-                ) : (
-                  <ContentCard content={card} key={card._id} progress={title === "Continue to Watch" ? progressPrecentage : null}/>
-                )}
-              </>
-            )
-          })}
+                  <ContentCard content={card} isTopTen={true} key={card._id} />
+                </div>
+              ) : (
+                <ContentCard content={card} key={card._id} progress={title === "Continue to Watch" ? getProgress(card._id) : null}/>
+              )}
+            </>
+          ))}
         </Carousel>
       </div>
     );

@@ -23,21 +23,25 @@ export const toggleFavorite = createAsyncThunk("userSlice/toggleFavorite", async
 
 export const toggleWatchList = createAsyncThunk(
   "userSlice/toggleWatchList",
-  async ({ contentId, stoppedAt }, thunkAPI) => {
+  async ({ contentId, stoppedAt, watchItem }, thunkAPI) => {
     const token = thunkAPI.getState().userSlice.token;
     if (!token) {
       return thunkAPI.rejectWithValue("Token not found");
     }
 
-    const body = JSON.stringify({ contentId, stoppedAt });
-    const response = await customFetch(
-      `users/toggle-watch/${contentId}`,
-      "POST",
-      body,
-      { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
-    );
-
-    return response;
+    const body = JSON.stringify({ contentId, stoppedAt, watchItem });
+    try {
+      const response = await customFetch(
+        `users/toggle-watch/${contentId}`,
+        "POST",
+        body,
+        { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
+      );
+      return response;
+    } catch (error) {
+      console.error("toggle watch list error: ", error);
+      return thunkAPI.rejectWithValue("failed to update watch list");
+    }
   }
 );
 

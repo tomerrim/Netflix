@@ -99,7 +99,7 @@ export const HomePage = ({contentType = "all"}) => {
 
   return (
     <>
-    <Title title={"Netflix"}/>
+    <Title title={"My Netflix"}/>
     <div className="homePage">
       { content[randomIndex] && <RandomContent content={content[randomIndex]}/>}
       { isLoggedIn && user.favoritesList.length > 0 && <CardList cards={user.favoritesList} title={`${user.username}'s List`}/> }
@@ -127,8 +127,6 @@ export const HomePage = ({contentType = "all"}) => {
           </>
         )
       }
-      {/* { (contentType === "movies" || contentType === "all") && <CardList cards={movies} title={"All Movies"}/> }
-      { (contentType === "series" || contentType === "all") && <CardList cards={series} title={"All Series"}/> } */}
     </div>
     </>
   );
