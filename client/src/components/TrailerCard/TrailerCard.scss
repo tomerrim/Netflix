@@ -3,7 +3,12 @@
     flex-direction: column;
     border-radius: 10px;
     background-color: #000;
-    
+    position: absolute;
+    bottom: -70px;
+    left: -120px;
+    z-index: 10;
+    width: 400px;
+    height: 350px;
     .buttons {
         display: flex;
         flex-direction: row;
@@ -13,15 +18,16 @@
         }
 
     }
-        .info {
-            p {
-                font-size: 12px;
-                text-align: start;
-                .age {
-                    margin: 0 5px;
-                    padding: 2px;
-                    border: 1px solid #ffffff;
-                }
+    
+    .info {
+        p {
+            font-size: 16px;
+            text-align: start;
+            .age {
+                margin: 0 5px;
+                padding: 2px;
+                border: 1px solid #ffffff;
             }
         }
+    }
 }

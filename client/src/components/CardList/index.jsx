@@ -31,9 +31,8 @@ export const CardList = ({cards, title}) => {
           keyBoardControl={true}
           customTransition="all .5"
           transitionDuration={500}
-          containerClass="carousel-container"
+          // containerClass="carousel-container"
           removeArrowOnDeviceType={[]}
-          dotListClass="custom-dot-list-style"
           itemClass="carousel-item-padding-40-px"
         >
           {cards.map((card, index) => (

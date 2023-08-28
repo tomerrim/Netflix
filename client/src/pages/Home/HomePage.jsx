@@ -79,6 +79,7 @@ export const HomePage = ({contentType = "all"}) => {
         console.log("fetch data")
         fetchAllContent();
       }
+      updateRandomIndex(content.length);
       // fetchWatchList();
     }
   }, [isLoggedIn]);

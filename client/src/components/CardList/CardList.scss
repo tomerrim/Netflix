@@ -22,7 +22,7 @@
 
         .number {
             font-weight: bold;
-            font-size: calc(220px);
+            font-size: calc(200px);
             background-color: transparent;
             color: #000;
             display: flex;
@@ -32,7 +32,7 @@
             line-height: 1;
             // left: -40%;
             // bottom: 0;
-            z-index: 0;
+            z-index: -1;
             text-shadow: -1px -1px 0 #d3d3d3,
                          1px -1px 0 #d3d3d3 ,
                          -1px 1px 0 #d3d3d3,
@@ -72,6 +72,12 @@
 
             @media screen and (max-width:1024px) {
                 width: 100%;
+            }
+        }
+
+        &:hover{
+            .number {
+                display: none;
             }
         }
     }
