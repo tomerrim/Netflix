@@ -21,6 +21,18 @@ export const toggleFavorite = createAsyncThunk("userSlice/toggleFavorite", async
   return response;
 })
 
+export const toggleLike = createAsyncThunk("userSlice/toggleLike", async (contentId, thunkAPI) => {
+  const token = thunkAPI.getState().userSlice.token;
+  const response = await customFetch(`users/toggle-like/${contentId}`, "POST", null, {Authorization: `Bearer ${token}`});
+  return response;
+})
+
+export const toggleDislike = createAsyncThunk("userSlice/toggleDislike", async (contentId, thunkAPI) => {
+  const token = thunkAPI.getState().userSlice.token;
+  const response = await customFetch(`users/toggle-dislike/${contentId}`, "POST", null, { Authorization: `Bearer ${token}` });
+  return response;
+});
+
 export const toggleWatchList = createAsyncThunk(
   "userSlice/toggleWatchList",
   async ({ contentId, stoppedAt, watchItem }, thunkAPI) => {
@@ -91,6 +103,12 @@ export const userSlice = createSlice({
         })
         .addCase(toggleWatchList.fulfilled, (state, action) => {
           state.user.watchList = action.payload.watchList;
+        })
+        .addCase(toggleLike.fulfilled, (state, action) => {
+          state.user.likeList = action.payload.likeList;
+        })
+        .addCase(toggleDislike.fulfilled, (state, action) =>{
+          state.user.dislikeList = action.payload.dislikeList;
         })
   }
 });

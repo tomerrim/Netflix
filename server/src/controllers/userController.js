@@ -123,6 +123,56 @@ export const toggleWatchList = async (req, res) => {
     }
 }
 
+export const toggleLike = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const contentId = req.params.contentId;
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).send("User Not Found");
+
+    const index = user.likeList.indexOf(contentId);
+    if (index === -1) {
+      user.likeList.push(contentId);
+    } else {
+      user.likeList.splice(index, 1);
+    }
+
+    await user.save();
+    await user.populate("likeList");
+
+    res.json({ likeList: user.likeList });
+  } catch (err) {
+    console.error("Error in toggleLike: ", err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+export const toggleDislike = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const contentId = req.params.contentId;
+
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).send("User Not Found");
+
+    const index = user.dislikeList.indexOf(contentId);
+    if (index === -1) {
+      user.dislikeList.push(contentId);
+    } else {
+      user.dislikeList.splice(index, 1);
+    }
+
+    await user.save();
+    await user.populate("dislikeList");
+
+    res.json({ dislikeList: user.dislikeList });
+  } catch (err) {
+    console.error("Error in toggleDislike: ", err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 export const getUserByEmail = (email) =>
   User.findOne({ email })
     .populate("favoritesList")

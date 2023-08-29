@@ -10,6 +10,8 @@ const userSchema = mongoose.Schema({
     content: { type: Schema.Types.ObjectId, ref: "Content" },
     stoppedAt: { type: Number, default: 0 }
   }],
+  likeList: [{ type: Schema.Types.ObjectId, ref: "Content" }],
+  dislikeList: [{ type: Schema.Types.ObjectId, ref: "Content" }]
 });
 
 const User = mongoose.model('User', userSchema);
