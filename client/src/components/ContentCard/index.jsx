@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export const ContentCard = ({ content, progress = 0, isTopTen = false }) => {
     const navigate = useNavigate();
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-    const [isTablet, setIsTablet] =  useState(window.innerWidth <= 1024);
+    const [isTablet, setIsTablet] =  useState(window.innerWidth <= 1150);
     const [isHovered, setIsHovered] = useState(false);
 
     const navToInfo = () => navigate(`/content/${content._id}`);
@@ -16,7 +16,7 @@ export const ContentCard = ({ content, progress = 0, isTopTen = false }) => {
       const handleResize = () => {
         if (window.innerWidth <= 768) {
           setIsMobile(true);
-        }else if (window.innerWidth <= 1024) {
+        }else if (window.innerWidth <= 1150) {
           setIsTablet(true);
         } else {
           setIsMobile(false);

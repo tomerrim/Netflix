@@ -4,13 +4,17 @@ export const HEADER_ITEMS = [
 ];
 
 export const RESPONSIVE = {
-  superLargeDesktop: {
+  superLargeDesktop1: {
     breakpoint: { max: 4000, min: 3000 },
     items: 8,
   },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+  superLargeDesktop: {
+    breakpoint: { max: 3000, min: 1400 },
     items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 1400, min: 1024 },
+    items: 4,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },

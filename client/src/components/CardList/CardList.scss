@@ -1,6 +1,8 @@
 .cardList {
-    display: flex;
-    flex-direction: column;
+    //display: flex;
+    //flex-direction: column;
+    height: 400px;
+    overflow: hidden;
     // margin: 0 auto;
     .title {
         font-size: 30px ;
@@ -81,7 +83,22 @@
             }
         }
     }
-    .carousel-item-padding-40-px {
+
+    .carousel {
+        position: relative;
+        overflow: visible;
+        &:hover {
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    .carousel-item {
         padding: 0 5px !important;
+        
+        &:hover {
+            position: absolute;
+            z-index: 2;
+        }
     }
 }

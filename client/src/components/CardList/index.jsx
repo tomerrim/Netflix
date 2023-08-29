@@ -33,7 +33,8 @@ export const CardList = ({cards, title}) => {
           transitionDuration={500}
           // containerClass="carousel-container"
           removeArrowOnDeviceType={[]}
-          itemClass="carousel-item-padding-40-px"
+          className="carousel"
+          itemClass="carousel-item"
         >
           {cards.map((card, index) => (
             <>

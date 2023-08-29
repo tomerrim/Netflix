@@ -32,8 +32,6 @@
 //       await signUp(req, res);
 //       const actualUser = await User.findOne({email});
 //       await expect(actualUser).toEqual(expectedUser);
-//     }, {
-//       timeout: 10000,
 //     });
 
 //     it("should not create a new user if the email is already registered", async () => {
@@ -53,9 +51,10 @@
 
 //       const res = {};
 
-//       await signUp(req, res);
-//       await expect(signUp(req, res)).rejects.toThrow(new Error("Email already registered"));
-//     }, { timeout: 10000 });
+//       await signUp(res, res);
+//       const error = await expect(signUp(req, res)).rejects.toThrow(new Error("Email already registered"));
+//       expect(error.message).toEqual("Email already registered")
+//     });
 //   });
 
 //   describe("signIn", () => {
@@ -65,17 +64,6 @@
 //         email: "test@email.com",
 //         password: "testPassword",
 //       };
-
-//       const req = {
-//         body: {
-//           username,
-//           email,
-//           password,
-//         },
-//       };
-
-//       const res = {};
-
 //       await signUp(req, res);
 //       const expectedUser = {
 //         _id: "",
@@ -93,17 +81,6 @@
 //         email: "test@email.com",
 //         password: "testPassword",
 //       };
-
-//       const req = {
-//         body: {
-//           username,
-//           email,
-//           password,
-//         },
-//       };
-
-//       const res = {};
-
 //       await expect(signUp(req, res)).rejects.toEqual(new Error("Invalid Credentials"));
 //     });
 //   });

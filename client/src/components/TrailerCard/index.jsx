@@ -18,7 +18,7 @@ export const TrailerCard = ({content}) => {
     const user = useSelector(state => state.userSlice.user);
     const [play, setPlay] = useState(false);
 
-    const isFavorite = user.favoritesList.includes(content._id);
+    const isFavorite = user.favoritesList.some(item => item._id === content._id);
 
     const navToInfo = () => navigate(`/content/${content._id}`);
 
@@ -31,7 +31,7 @@ export const TrailerCard = ({content}) => {
     }
     return (
         <div className="trailerCard">
-            <ReactPlayer url={content.trailer} playing={play} width={'100%'} height={'100%'}/> 
+            <ReactPlayer url={content.trailer} playing={play} width={'100%'} height={'100%'} className="player"/> 
             <div className="buttons">
                 <Btn onClick={playTrailer}><PlayCircleOutlineIcon/></Btn>
                 <Btn onClick={handleFavoriteToggle}>
