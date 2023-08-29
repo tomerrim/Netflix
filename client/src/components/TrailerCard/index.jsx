@@ -49,7 +49,7 @@ export const TrailerCard = ({content}) => {
                     {/* <AddCircleOutlineIcon/> */}
                 </Btn>
                 <Btn onClick={handleDislikeToggle}><ThumbDownOutlinedIcon style={{color: isDislike ? "red" : "white"}}/></Btn>
-                <Btn onClick={handleLikeToggle}><ThumbUpOutlinedIcon style={ {color: isLike ? "green" : "white"}}/></Btn>
+                <Btn onClick={handleLikeToggle}><ThumbUpOutlinedIcon style={ {color: isLike ? "red" : "white"}}/></Btn>
             </div>
             <div className="info" onClick={navToInfo}>
                 <p>

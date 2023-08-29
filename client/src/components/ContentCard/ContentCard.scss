@@ -1,11 +1,11 @@
 .contentCard {
     //padding: 5px;
-    margin: 10px 0;
+    //margin: 10px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.5s;
     border-radius: 10px;
-    width: 325px;
-    height: 245px;
+    width: 300px;
+    height: 200px;
     overflow: visible;
     //z-index: 2;
 
@@ -55,12 +55,17 @@
     }
 
     &.tablet {
-        width: 240px;
+        width: 220px;
         height: 150px;
 
         img {
             width: 100%;
             height: 150px;
+        }
+
+        .topTen {
+            width: 150px;
+            height: 220px;
         }
 
         &:hover {
@@ -84,6 +89,11 @@
             height: 200px;
         }
 
+        .topTen {
+            width: 150px;
+            height: 220px;
+        }
+
         .progressContainer {
             height: 3px;
 
@@ -93,7 +103,7 @@
         }
 
         &:hover {
-            transform: scale(1.1);
+            transform: scale(1.25);
         }
     }
 
@@ -103,6 +113,10 @@
         img {
             width: 100%;
             height: 170px;
+        }
+
+        .topTen {
+            height: 225px;
         }
     }
 }

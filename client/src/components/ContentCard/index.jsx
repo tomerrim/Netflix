@@ -48,6 +48,7 @@ export const ContentCard = ({ content, progress = 0, isTopTen = false }) => {
               src={isMobile || isTopTen ? content.imgVertical : content.imgThumb}
               alt={content.title}
               onClick={navToInfo}
+              className={isTopTen ? "topTen" : ""}
               />
               {progress > 0 && (
                 <div className="progressContainer">
