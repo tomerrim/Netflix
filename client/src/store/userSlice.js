@@ -60,11 +60,11 @@ export const toggleWatchList = createAsyncThunk(
 export const userSlice = createSlice({
   name: "userSlice",
   initialState: {
-    user: null,
+    user: localStorage.getItem("user") !== null ? JSON.parse(localStorage.getItem("user")) : null,
     loading: false,
     error: null,
     isLoggedIn: false,
-    token: null,
+    token: localStorage.getItem("token") !== null ? localStorage.getItem("token") : null,
   },
   reducers: {
     setUser(state, action) {
@@ -91,6 +91,7 @@ export const userSlice = createSlice({
             state.isLoggedIn = true;
             state.user = action.payload.user;
             localStorage.setItem("token", action.payload.token);
+            localStorage.setItem("user", JSON.stringify(action.payload.user));
             state.token = action.payload.token;
             //console.log("action.payload.user: ", action.payload.user);
         })
@@ -100,15 +101,19 @@ export const userSlice = createSlice({
         })
         .addCase(toggleFavorite.fulfilled, (state, action) => {
           state.user.favoritesList = action.payload.favoritesList;
+          localStorage.setItem("user", JSON.stringify(state.user));
         })
         .addCase(toggleWatchList.fulfilled, (state, action) => {
           state.user.watchList = action.payload.watchList;
+          localStorage.setItem("user", JSON.stringify(state.user));
         })
         .addCase(toggleLike.fulfilled, (state, action) => {
           state.user.likeList = action.payload.likeList;
+          localStorage.setItem("user", JSON.stringify(state.user));
         })
         .addCase(toggleDislike.fulfilled, (state, action) =>{
           state.user.dislikeList = action.payload.dislikeList;
+          localStorage.setItem("user", JSON.stringify(state.user));
         })
   }
 });

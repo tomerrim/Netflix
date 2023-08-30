@@ -40,6 +40,8 @@ export const signIn = async (req, res) => {
                     email: user.email,
                     favoritesList: user.favoritesList,
                     watchList: user.watchList,
+                    likeList: user.likeList,
+                    dislikeList: user.dislikeList,
                 },
                 token:generateToken(user),
             })
@@ -74,23 +76,6 @@ export const toggleFavorite = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 }
-
-// export const addToWatchList = async (req, res) => {
-//     const userId = req.body.user._id;
-//     const contentId = req.body.content._id;
-//     const stoppedAt = req.body.stoppedAt;
-    
-//     const user = await User.findById(userId);
-//     user.watchList.push({content: contentId, stoppedAt});
-//     await user.save();
-//     res.json({success: true});
-// }
-
-// export const getWatchList = async (req,res) => {
-//     const userId = req.body.user._id;
-//     const user = await User.findById(userId).populate("watchList.content");
-//     res.json(user.watchList);
-// }
 
 export const toggleWatchList = async (req, res) => {
     console.log("toggleWatchList endpoint hit");
@@ -177,6 +162,8 @@ export const getUserByEmail = (email) =>
   User.findOne({ email })
     .populate("favoritesList")
     .populate("watchList.content")
+    .populate("likeList")
+    .populate("dislikeList")
     .catch(err => {
         console.error("Error fetching user by email: ", err);
         return null;

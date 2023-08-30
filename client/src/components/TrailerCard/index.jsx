@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDislike, toggleFavorite, toggleLike } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
+import { setSingleContent } from "../../store/contentSlice";
 
 export const TrailerCard = ({content}) => {
     const navigate = useNavigate();
@@ -22,7 +23,10 @@ export const TrailerCard = ({content}) => {
     const isLike = user.likeList?.some(item => item._id === content._id);
     const isDislike = user.dislikeList?.some(item => item._id === content._id);
 
-    const navToInfo = () => navigate(`/content/${content._id}`);
+    const navToInfo = () => {
+        dispatch(setSingleContent(content));
+        navigate(`/content/${content._id}`)
+    };
 
     const handleFavoriteToggle = () => {
         dispatch(toggleFavorite(content._id));
@@ -46,7 +50,6 @@ export const TrailerCard = ({content}) => {
                 <Btn onClick={playTrailer}><PlayCircleOutlineIcon/></Btn>
                 <Btn onClick={handleFavoriteToggle}>
                     {isFavorite ? <CheckIcon style={{color: "red"}}/> : <AddCircleOutlineIcon />}
-                    {/* <AddCircleOutlineIcon/> */}
                 </Btn>
                 <Btn onClick={handleDislikeToggle}><ThumbDownOutlinedIcon style={{color: isDislike ? "red" : "white"}}/></Btn>
                 <Btn onClick={handleLikeToggle}><ThumbUpOutlinedIcon style={ {color: isLike ? "red" : "white"}}/></Btn>

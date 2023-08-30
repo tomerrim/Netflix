@@ -24,7 +24,6 @@ export const WatchPage = () => {
 
     const handleVideoPause= () => {
         const stoppedAt = Math.floor(currentTime);
-        console.log("stopped at", stoppedAt);
         const contentId = singleContent._id;
         const newWatchItem = {
             content: singleContent,

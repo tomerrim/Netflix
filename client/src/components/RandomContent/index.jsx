@@ -13,7 +13,10 @@ export const RandomContent = ({content}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     //console.log("content id: ",content._id)
-    const navToInfo = () => navigate(`/content/${content._id}`);
+    const navToInfo = () => {
+      dispatch(setSingleContent(content));  
+      navigate(`/content/${content._id}`);
+    };
     const navToWatch = () => {
       dispatch(setSingleContent(content));
       navigate(`/content/${content._id}/movie`);
@@ -21,8 +24,6 @@ export const RandomContent = ({content}) => {
 
     const bgStyle = {
       backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%), url(${content.img})`,
-      // backgroundSize: "contain",
-      // backgroundPosition: "center",
     };
 
     return (
