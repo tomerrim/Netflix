@@ -48,7 +48,7 @@ export const signIn = async (req, res) => {
             return;
         }
     }
-    res.status(401).send("Invalid Credentials");
+    res.status(401).json({message: "Invalid Credentials"});
 };
 
 export const toggleFavorite = async (req, res) => {
@@ -73,7 +73,7 @@ export const toggleFavorite = async (req, res) => {
         res.json({favoritesList: user.favoritesList});
     } catch (err) {
         console.error("Error in toggleFavorite: ", err);
-        res.status(500).send("Internal Server Error");
+        res.status(500).json({message: "Internal Server Error"});
     }
 }
 

@@ -20,12 +20,23 @@
 }
 
 .form {
-    width: 300px;
+    width: 350px;
     height: 300px;
-    padding: 35px;
+    padding: 30px;
     border: 1px solid black;
     border-radius: 10px;
     background-color: rgba(10, 10, 10, 0.9);
+
+    h1 {
+        margin: 20px 0;
+    }
+
+    .error {
+        font-weight: bold;
+        border: 1px solid black;
+        background-color: #ebb134;
+        border-radius: 5px;
+    }
 
     .signIn {
         background-color: red;
@@ -33,6 +44,4 @@
         display: flex;
         justify-content: center;
     }
-
-    // .signInInput {}
 }

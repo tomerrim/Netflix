@@ -39,11 +39,11 @@ export const CardList = ({cards, title}) => {
           {cards.map((card, index) => (
             <>
               {title === "Top 10" ? (
-                <div className="topRated">
+                <div className="topRated" key={index} >
                   <div className={`number ${index === 9 ? "ten" : ""}`}>
                     {index + 1}
                   </div>
-                  <ContentCard content={card} isTopTen={true} key={card._id} />
+                  <ContentCard content={card} isTopTen={true} />
                 </div>
               ) : (
                 <ContentCard content={card} key={card._id} progress={title === "Continue to Watch" ? getProgress(card._id) : null}/>

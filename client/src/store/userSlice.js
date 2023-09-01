@@ -1,13 +1,16 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import { customFetch } from "../utils/customFetch";
 
-export const fetchuser = createAsyncThunk("userSlice/fetchUser", async (data) => {
-    if (data.email && data.password) {
-        return await customFetch("users/signin", "POST", data);
+export const fetchuser = createAsyncThunk("userSlice/fetchUser", async (data, thunkAPI) => {
+  try {
+    if (data.email && data.password){
+      return await customFetch("users/signin", "POST", data);
     } else {
-        console.log("Failed fetch user")
-        // throw new Error('Please enter email and password');
+      console.log("Failed fetch user");
     }
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 })
 
 export const toggleFavorite = createAsyncThunk("userSlice/toggleFavorite", async (contentId, thunkAPI) => {
@@ -77,6 +80,7 @@ export const userSlice = createSlice({
         state.isLoggedIn = false;
         state.token = null;
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
     },  
   },
   extraReducers: (builder) => {
@@ -93,11 +97,10 @@ export const userSlice = createSlice({
             localStorage.setItem("token", action.payload.token);
             localStorage.setItem("user", JSON.stringify(action.payload.user));
             state.token = action.payload.token;
-            //console.log("action.payload.user: ", action.payload.user);
         })
         .addCase(fetchuser.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.error;
+            state.error = "Wrong Email or Password";
         })
         .addCase(toggleFavorite.fulfilled, (state, action) => {
           state.user.favoritesList = action.payload.favoritesList;

@@ -31,9 +31,12 @@ export const SignIn = () => {
         e.preventDefault();
         try {
             if (email && password) {
-              dispatch(fetchuser({email, password}))
-              // dispatch(setUser());
-              navigate("/");
+              const action = await dispatch(fetchuser({email, password}));
+              if(fetchuser.fulfilled.match(action)) {
+                navigate("/");
+              } else {
+                console.log("Failed to sign in:", action.error.message);
+              }
             } else {
                 console.log("Please enter valid email or password")
             }
@@ -46,8 +49,9 @@ export const SignIn = () => {
     return (
       <div className="signInPage">
         <Title title={"Sign In"} />
-        <NetflixLogo className={"signInLogo"} width={200} height={60}/>
+        <NetflixLogo className={"signInLogo"} width={200} height={60} />
         <div className="form">
+          {error && <div className="error">{error}</div>}
           <h1>Sign In</h1>
           <form onSubmit={handleSubmit}>
             <Input
@@ -75,7 +79,6 @@ export const SignIn = () => {
             </div>
           </form>
           {loading && <div>Loading...</div>}
-          {error && <div className="error">{error}</div>}
         </div>
       </div>
     );

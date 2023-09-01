@@ -9,7 +9,6 @@ import Title from "../../components/Title";
 
 export const HomePage = ({contentType = "all"}) => {
   const dispatch= useDispatch();
-  // const navigate = useNavigate();
   const [randomIndex, setRandomIndex] = useState(null);
   const { actionContent, contentForKids } = useSelector(state => state.contentSlice);
   const {user } = useSelector((state) => state.userSlice);
@@ -25,26 +24,8 @@ export const HomePage = ({contentType = "all"}) => {
 
   const fetchAllContent = async () => {
     try {
-      // const allContent = await customFetch("content", "GET");
       dispatch(getAllContent());
       updateRandomIndex(content.length);
-      // dispatch(setContent(allContent));
-      // if (contentType === "movies" || contentType === "all") {
-      //   dispatch(setMovies(allContent));
-      //   dispatch(setActionContent(movies));
-      //   dispatch(setContentForKids(movies));
-      // }
-      // if (contentType === "series" || contentType === "all") {
-      //   dispatch(setSeries(allContent))
-      //   dispatch(setActionContent(series));
-      //   dispatch(setContentForKids(series));
-      // }
-      // if (contentType === "all") {
-      //   dispatch(setContent(allContent));
-      //   dispatch(setActionContent(allContent));
-      //   dispatch(setContentForKids(allContent));
-      // }
-      // updateRandomIndex(allContent.length);
     } catch (error) {
       console.log("Failed to fetch content");
     }
@@ -73,10 +54,6 @@ export const HomePage = ({contentType = "all"}) => {
     return () => clearInterval(interval);
   },[content]);
 
-  // console.log("content type: ", contentType)
-  //console.log("fav list: ", user.favoritesList);
-  // console.log("watch list: ", user.watchList);
-
   const watchListContent = user?.watchList.map(item => item.content);
 
   return (
@@ -87,7 +64,6 @@ export const HomePage = ({contentType = "all"}) => {
       { user && user.favoritesList.length > 0 && <CardList cards={user.favoritesList} title={`${user.username}'s List`}/> }
       { user && user.watchList.length > 0 && <CardList cards={watchListContent} title={"Continue to Watch"}/> }
       <CardList cards={content.slice(0,10)} title={"Top 10"}/>
-      {/* { (contentType === "all" || !contentType) && <CardList cards={content} title={"All Content"}/> } */}
       { 
         contentType === "movies" ? (
           <>
