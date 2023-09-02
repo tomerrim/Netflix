@@ -34,6 +34,7 @@ export const RandomContent = ({content}) => {
         <div className="line">
             <Btn className={"play"} onClick={navToWatch}><PlayArrowIcon/>Play</Btn>
             <Btn className={"info"} onClick={navToInfo}><InfoOutlinedIcon/>Info</Btn>
+            <div className="age">+{content.limit}</div>
         </div>
       </div>
     );

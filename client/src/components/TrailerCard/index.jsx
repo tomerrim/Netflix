@@ -45,7 +45,7 @@ export const TrailerCard = ({content}) => {
     }
     return (
         <div className="trailerCard">
-            <ReactPlayer url={content.trailer} playing={play} width={'100%'} height={'100%'} className="player"/> 
+            <ReactPlayer url={content.trailer} playing={play} width={'100%'} height={'100%'} className="player" light={true}/> 
             <div className="buttons">
                 <Btn onClick={playTrailer}><PlayCircleOutlineIcon/></Btn>
                 <Btn onClick={handleFavoriteToggle}>

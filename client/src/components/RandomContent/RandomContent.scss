@@ -3,53 +3,25 @@
     flex-direction: column;
     padding-left: 20px;
     position: relative;
-    padding-top: 80px;
-    top: -80px;
-
-    // position: relative;
-    // width: 100vw;
-    // overflow: hidden;
-    // z-index: 1;
-
-    // position: relative;
-    // width: 100%;
-    padding-top: 25%; // This value is for a 16:9 aspect ratio (9/16 = 0.5625)
+    top: 0px;
+    padding-top: 25%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
-    // .imgTitle, p, .line {
-    //     position: absolute;
-    // }
-
-    // .backgroundImage {
-    //     width: 100%;
-    //     height: auto;
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     z-index: -1;
-    // }
     
     p {
         width: 30%;
         word-wrap: normal;
         text-align: start;
-        // top: 40%;
-        // left: 5%;
     }
 
     .imgTitle {
         width: 30%;
-        // top: 10%;
-        // left: 5%;
     }
 
     .line {
         display: flex;
         padding-bottom: 10px;
-        // bottom: 10%;
-        // left: 5%;
 
         .play {
             background-color: #ffffff;
@@ -62,6 +34,18 @@
             color: #ffffff;
             
         }
+
+        .age {
+            display: flex;
+            margin-left: auto;
+            width: 100px;
+            text-align: start;
+            font-size: large;
+            align-items: center;
+            padding-left: 10px;
+            background-color: #9a9ea255;
+            border-left: 3px solid white;
+        }
     }
 }
 
@@ -69,6 +53,7 @@
     .content {
         p {
             width: 50%;
+            font-size: 14px;
         }
 
         .imgTitle {
@@ -79,8 +64,10 @@
 
 @media screen and (max-width: 768px) {
     .content {
+        
         p {
             width: 70%;
+            font-size: 12px;
         }
 
         .imgTitle {

@@ -25,6 +25,8 @@ export const HomePage = ({contentType = "all"}) => {
   const fetchAllContent = async () => {
     try {
       dispatch(getAllContent());
+      // dispatch(setActionContent(content));
+      // dispatch(setContentForKids(content));
       updateRandomIndex(content.length);
     } catch (error) {
       console.log("Failed to fetch content");

@@ -20,6 +20,12 @@ export const contentSlice = createSlice({
         setSingleContent(state, action) {
             state.singleContent = action.payload;
         },
+        setActionContent(state, action){
+            state.actionContent = action.payload.filter(content => content.genre === "Action");
+        },
+        setContentForKids(state, action){
+            state.contentForKids = action.payload.filter(content => Number(content.limit) <= 12);
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -34,4 +40,4 @@ export const contentSlice = createSlice({
 });
 
 export const contentReducer = contentSlice.reducer;
-export const { setSingleContent } = contentSlice.actions;
+export const { setSingleContent,setActionContent, setContentForKids } = contentSlice.actions;

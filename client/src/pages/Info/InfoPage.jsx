@@ -17,6 +17,7 @@ export const InfoPage = () => {
 
   useEffect(() => {
     dispatch(setSingleContent(singleContent));
+    console.log("single content: ", singleContent);
   },[singleContent, dispatch]);
 
   return (
