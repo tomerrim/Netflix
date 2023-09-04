@@ -14,9 +14,9 @@ Security is a priority; hence, user authentication and data encryption are handl
 Home Page
 ![homepage](https://github.com/tomerrim/Netflix/assets/126825978/2f2a46d8-5229-428c-9630-6a961bff541b)
 
-![homepage2](https://github.com/tomerrim/Netflix/assets/126825978/1de1447d-1930-44cb-950e-509dfc98dee8)
-
 ![homepage3-cardhover](https://github.com/tomerrim/Netflix/assets/126825978/04609685-d8c3-4536-9de2-a2d07b60c0aa)
+
+![homepage2](https://github.com/tomerrim/Netflix/assets/126825978/1de1447d-1930-44cb-950e-509dfc98dee8)
 
 
 Info Page
