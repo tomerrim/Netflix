@@ -43,6 +43,11 @@ export const TrailerCard = ({content}) => {
     const playTrailer = () => {
         setPlay(true);
     }
+
+    // const navToWatch = () => {
+    //     dispatch(setSingleContent(content));
+    //     navigate(`/content/${content._id}/movie`);
+    // }
     return (
         <div className="trailerCard">
             <ReactPlayer url={content.trailer} playing={play} width={'100%'} height={'100%'} className="player" light={true}/> 

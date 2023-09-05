@@ -16,7 +16,6 @@ export const WatchPage = () => {
     const [playing, setPlaying] = useState(true);
     const [hasSought, setHasSought] = useState(false);
     const playerRef = useRef(null);
-    const navToInfo = () => navigate(`/content/${singleContent._id}`);
 
     const handleProgress = (progress) => {
         setCurrentTime(progress.playedSeconds)
@@ -56,6 +55,11 @@ export const WatchPage = () => {
         }
     }
     
+    const navToInfo = () => {
+        handleVideoPause();
+        navigate(`/content/${singleContent._id}`);
+    };
+
     return (
       <div className="watchPage">
         <Btn onClick={navToInfo} className={"back"}>
