@@ -38,13 +38,13 @@ export const toggleDislike = createAsyncThunk("userSlice/toggleDislike", async (
 
 export const toggleWatchList = createAsyncThunk(
   "userSlice/toggleWatchList",
-  async ({ contentId, stoppedAt, watchItem }, thunkAPI) => {
+  async ({ contentId, stoppedAt, watchItem, totalDuration }, thunkAPI) => {
     const token = thunkAPI.getState().userSlice.token;
     if (!token) {
       return thunkAPI.rejectWithValue("Token not found");
     }
 
-    const body = JSON.stringify({ contentId, stoppedAt, watchItem });
+    const body = JSON.stringify({ contentId, stoppedAt, watchItem, totalDuration });
     try {
       const response = await customFetch(
         `users/toggle-watch/${contentId}`,

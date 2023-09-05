@@ -13,7 +13,9 @@ export const CardList = ({cards, title}) => {
     
     const getProgress = (cardId) => {
       const watchItem = user.watchList.find(item => item.content._id === cardId);
-      return watchItem ? watchItem.stoppedAt : null;
+      const stoppedAtForContent = watchItem ? watchItem.stoppedAt : 0;
+      const totalDurationForContent = watchItem ? watchItem.totalDuration : 1;
+      return (stoppedAtForContent / totalDurationForContent) * 100;
     }
     
     return (

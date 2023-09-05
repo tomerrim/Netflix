@@ -15,7 +15,13 @@ export const WatchPage = () => {
     const [currentTime, setCurrentTime] = useState(0);
     const [playing, setPlaying] = useState(true);
     const [hasSought, setHasSought] = useState(false);
+    const [duration, setDuration] = useState(0);
+    const [hasEnded, setHasEnded] = useState(false);
     const playerRef = useRef(null);
+
+    const handleDuration = (duration) => {
+        setDuration(duration);
+    };
 
     const handleProgress = (progress) => {
         setCurrentTime(progress.playedSeconds)
@@ -27,6 +33,7 @@ export const WatchPage = () => {
         const newWatchItem = {
             content: singleContent,
             stoppedAt,
+            totalDuration: duration,
         };
         
         dispatch(toggleWatchList({contentId, watchItem: newWatchItem}));
@@ -34,8 +41,10 @@ export const WatchPage = () => {
     }
 
     const handleVideoEnd = () => {
+        console.log("Video Ended. Attempting to remove from watchList");
         const contentId = singleContent._id;
-        dispatch(toggleWatchList({contentId, stoppedAt: "end"}));
+        dispatch(toggleWatchList({contentId, stoppedAt: -1}));
+        setHasEnded(true); 
     }
 
     const watchItem = user.watchList.find(item => item.content._id.toString() === singleContent._id);
@@ -56,7 +65,10 @@ export const WatchPage = () => {
     }
     
     const navToInfo = () => {
-        handleVideoPause();
+        if(!hasEnded) {
+            console.log("saved the video")
+            handleVideoPause();
+        }
         navigate(`/content/${singleContent._id}`);
     };
 
@@ -77,6 +89,7 @@ export const WatchPage = () => {
           onPause={handleVideoPause}
           onEnded={handleVideoEnd}
           onReady={handlePlayerReady}
+          onDuration={handleDuration}
         />
       </div>
     );

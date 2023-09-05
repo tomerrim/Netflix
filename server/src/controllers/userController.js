@@ -78,24 +78,27 @@ export const toggleFavorite = async (req, res) => {
 }
 
 export const toggleWatchList = async (req, res) => {
-    console.log("toggleWatchList endpoint hit");
+    //console.log("toggleWatchList endpoint hit");
     try {
         const userId = req.user._id;
         const contentId = req.params.contentId;
-        const stoppedAt = req.body.watchItem.stoppedAt || 0;
-        console.log("request body: ", req.body);
-        console.log("stopped at: ",stoppedAt);
+        const stoppedAt =req.body.watchItem ? req.body.watchItem.stoppedAt : (req.body.stoppedAt || 0);
+        const totalDuration = req.body.watchItem?.totalDuration || 0;
+        //console.log("request body: ", req.body);
+        //console.log("stopped at: ",stoppedAt);
         const user = await User.findById(userId);
         if (!user) return res.status(404).send("User Not Found");
 
         const watchItem = user.watchList.find(item => item.content.toString() === contentId);
         if(!watchItem) {
-            user.watchList.push({content: contentId, stoppedAt})
-        } else if (stoppedAt === "end") {
+            user.watchList.push({content: contentId, stoppedAt, totalDuration})
+        } else if (stoppedAt === -1) {
             const index = user.watchList.findIndex(watchItem => watchItem.content.toString() === contentId);
+           // console.log("Before Splice: ", user.watchList);
             user.watchList.splice(index,1);
         } else {
             watchItem.stoppedAt = stoppedAt;
+            watchItem.totalDuration = totalDuration;
         }
 
         await user.save();

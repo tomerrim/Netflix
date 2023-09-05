@@ -8,7 +8,8 @@ const userSchema = mongoose.Schema({
   favoritesList: [{ type: Schema.Types.ObjectId, ref: "Content" }],
   watchList: [{
     content: { type: Schema.Types.ObjectId, ref: "Content" },
-    stoppedAt: { type: Number, default: 0 }
+    stoppedAt: { type: Number, default: 0 },
+    totalDuration: { type: Number, default: 0 },
   }],
   likeList: [{ type: Schema.Types.ObjectId, ref: "Content" }],
   dislikeList: [{ type: Schema.Types.ObjectId, ref: "Content" }]
