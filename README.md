@@ -14,23 +14,13 @@ Security is a priority; hence, user authentication and data encryption are handl
 Home Page
 ![homepage](https://github.com/tomerrim/Netflix/assets/126825978/2f2a46d8-5229-428c-9630-6a961bff541b)
 
-![homepage2](https://github.com/tomerrim/Netflix/assets/126825978/1de1447d-1930-44cb-950e-509dfc98dee8)
-
 ![homepage3-cardhover](https://github.com/tomerrim/Netflix/assets/126825978/04609685-d8c3-4536-9de2-a2d07b60c0aa)
 
-on Mobile
-
-![homepage1-mobile](https://github.com/tomerrim/Netflix/assets/126825978/8c46aec7-d4ea-4912-8534-65c5aa6fec4f)
-
-![homepage2-moblie](https://github.com/tomerrim/Netflix/assets/126825978/64370f71-9b5c-49b7-a8a4-773da51de63f)
-
-![homepage3-mobile](https://github.com/tomerrim/Netflix/assets/126825978/7481617e-9d13-48ed-9eeb-9d8ba14374d6)
+![homepage2](https://github.com/tomerrim/Netflix/assets/126825978/1de1447d-1930-44cb-950e-509dfc98dee8)
 
 
 Info Page
 ![infopage](https://github.com/tomerrim/Netflix/assets/126825978/fa73fe56-4b2b-44e4-8ad5-5dfa6af42795)
-
-![infopage-mobile](https://github.com/tomerrim/Netflix/assets/126825978/635d7706-6e36-4da2-b902-22e4afd2e397)
 
 
 Search Page
@@ -39,8 +29,6 @@ Search Page
 
 Watch Page
 ![watchpage](https://github.com/tomerrim/Netflix/assets/126825978/3611dc40-67c8-432c-93f1-c84eec9e8187)
-
-![watchpage-mobile](https://github.com/tomerrim/Netflix/assets/126825978/cb0531b0-8036-4d68-bdf0-e16727ff0064)
 
 
 Sign In
