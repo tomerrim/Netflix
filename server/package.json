@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.js",
+  "main": "src/index.js",
   "type": "module",
   "jest": {
     "testEnvironment": "node",
@@ -17,8 +17,8 @@
     }
   },
   "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js",
+    "start": "node src/index.js",
+    "watch": "nodemon src/index.js",
     "test": "jest"
   },
   "author": "",

@@ -1,22 +1,14 @@
-import express from "express";
-import cors from "cors";
-import seedRouter from "../src/routes/seedRoute.js";
-import userRouter from "./routes/userRoute.js";
-import contentRouter from "./routes/contentRoute.js";
+import app from "./app.js";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 
-const app = express();
+dotenv.config();
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const PORT = process.env.PORT || 8000;
+const MONGODB_URL = process.env.MONGODB_URL;
 
-app.use("/api/users", userRouter);
-app.use("/api/seedData", seedRouter);
-app.use("/api/content", contentRouter);
-
-app.use((err, req, res, next) => {
-    console.error("Unhandled error: ", err);
-    res.status(500).send("Server error. Please try again later.")
-})
-
-export default app;
+mongoose.connect(MONGODB_URL).then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}).catch((e) => console.error(e));
