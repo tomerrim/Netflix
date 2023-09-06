@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { HelmetProvider } from "react-helmet-async";
-import axios from "axios";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { SignUp } from "./pages/SignUp/SignUp.jsx";
@@ -14,11 +13,6 @@ import { store } from "./store";
 import { WatchPage } from "./pages/Watch/WatchPage.jsx";
 import { SearchPage } from "./pages/Search/SearchPage.jsx";
 import { ContentPage } from "./pages/ContentPage.jsx";
-
-// axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
-axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL
-  // ? import.meta.env.VITE_SERVER_URL
-  // : "http://localhost:8000/api";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
