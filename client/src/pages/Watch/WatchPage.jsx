@@ -29,7 +29,7 @@ export const WatchPage = () => {
 
     const handleVideoPause= () => {
         const stoppedAt = Math.floor(currentTime);
-        const contentId = singleContent._id;
+        const contentId = singleContent?._id;
         const newWatchItem = {
             content: singleContent,
             stoppedAt,
@@ -47,7 +47,7 @@ export const WatchPage = () => {
         setHasEnded(true); 
     }
 
-    const watchItem = user.watchList.find(item => item.content._id.toString() === singleContent._id);
+    const watchItem = user.watchList?.find(item => item.content?._id.toString() === singleContent._id);
     const stoppedAtForContent = watchItem ? watchItem.stoppedAt : 0;
 
     const handlePlayerReady = () => {
@@ -78,7 +78,7 @@ export const WatchPage = () => {
           <ArrowBackOutlinedIcon />
         </Btn>
         <ReactPlayer
-          url={singleContent.movie}
+          url={singleContent?.movie}
           controls={true}
           width={"100%"}
           height={"100%"}
