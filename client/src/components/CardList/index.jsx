@@ -22,8 +22,8 @@ export const CardList = ({cards, title}) => {
       <div className="cardList">
         <h1 className="title">{title}</h1>
         <Carousel
-          swipeable={false}
-          draggable={false}
+          swipeable={true}
+          draggable={true}
           showDots={false}
           responsive={RESPONSIVE}
           ssr={true} // means to render carousel on server-side.
