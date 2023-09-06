@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:8000/api";
+// const baseUrl = "http://localhost:8000/api";
+const baseUrl = import.meta.env.VITE_SERVER_URL;
+console.log(baseUrl)
 
 export const customFetch = async (url, method, data, headers = {}) => {
     try {
