@@ -23,7 +23,7 @@ export const SignIn = () => {
         if(user) {
             navigate("/")
         } else if (error) {
-            console.log("Error")
+            console.log("Error: ", error)
         }
     },[navigate, user, error])
 
