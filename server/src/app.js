@@ -8,7 +8,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://tomer-netflix.vercel.app/",
+    origin: "https://tomer-netflix.vercel.app",
   })
 );
 app.use(express.json());
