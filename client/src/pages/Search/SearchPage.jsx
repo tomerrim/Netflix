@@ -1,11 +1,13 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Search.scss";
 import { useEffect, useState } from "react";
 import queryString from "query-string";
 import { FILTERS } from "../../utils/constants";
+import { setSingleContent } from "../../store/contentSlice";
 
 export const SearchPage = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
     const { movies, series } = useSelector(state => state.contentSlice);
@@ -46,6 +48,11 @@ export const SearchPage = () => {
         }
     },[searchQuery, movies, series])
 
+    const navToInfo = (item) => {
+        dispatch(setSingleContent(item));
+        navigate(`/content/${item._id}`)
+    }
+
     return (
         <div className="searchPage">
             <div className="filter">
@@ -59,7 +66,7 @@ export const SearchPage = () => {
                 <h2>Movies</h2>
                 <div className="items">
                     {filteredMovies.map((m) => (
-                        <div key={m._id} className="item" onClick={() => navigate(`/content/${m._id}`)}>
+                        <div key={m._id} className="item" onClick={() => navToInfo(m)}>
                             <img src={m.img} alt={m.title} />
                         </div>
                     ))}
@@ -67,7 +74,7 @@ export const SearchPage = () => {
                 <h2>Series</h2>
                 <div className="items">
                     {filteredSeries.map((s) => (
-                        <div key={s._id} className="item" onClick={() => navigate(`/content/${s._id}`)}>
+                        <div key={s._id} className="item" onClick={() => navToInfo(s)}>
                             <img src={s.img} alt={s.title} width={100} height={100}/>
                         </div>
                     ))}
