@@ -22,5 +22,5 @@ app.use((err, req, res, next) => {
     console.error("Unhandled error: ", err);
     res.status(500).send("Server error. Please try again later.")
 })
-
+console.log("test");
 export default app;
